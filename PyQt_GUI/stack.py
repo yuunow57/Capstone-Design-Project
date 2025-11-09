@@ -3,7 +3,10 @@
 
 from PyQt5 import QtWidgets, uic
 import sys, os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from battery_graph import BatteryGraphWidget
+
+from PyQt_Service.Setting import SettingController
 
 class StackApp(QtWidgets.QMainWindow):
     def __init__(self):
@@ -37,6 +40,9 @@ class StackApp(QtWidgets.QMainWindow):
             layout = QtWidgets.QVBoxLayout(frame)
             layout.setContentsMargins(0,0,0,0)  # 프레임에 꽉 차게
             layout.addWidget(graph)
+
+        self.setting_controller = SettingController(page_setting)
+        
 
         # stackedWidget에 추가
         self.stack.addWidget(page_sungp)
