@@ -1,4 +1,6 @@
-`pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial`
+```
+pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
+```
 
 
 ```
