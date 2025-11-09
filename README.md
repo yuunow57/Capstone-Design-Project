@@ -7,9 +7,11 @@ pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
 📁 폴더 구조  
 
 📦 Capstone_Design_Project  
-┣ 📂 PyQt_GUI                 # GUI 실행 및 화면 관리 (stack.py 등)  
-   ┣ 📂 PyQt_Service          # 기능 로직 관리  
-   ┗ 📂 Setting               # 설정 페이지 관련 로직  
+┣ 📂 PyQt_GUI              # GUI 실행 및 화면 관리 (stack.py 등)  
+┗ 📂 PyQt_Service          # 기능 로직 관리  
+   ┣ 📂 Dashboard               # 대시보드 페이지 관련 로직  
+   ┣ 📂 Graph                   # 모니터링 페이지 관련 로직  
+   ┗ 📂 Setting                 # 설정 페이지 관련 로직  
       ┣ 📜 __init__.py                  # 패키지 초기화  
       ┣ 📜 setting_controller.py        # 설정 페이지의 중앙 컨트롤러  
       ┣ 📜 usb_port_manager.py          # USB 포트 탐색 및 적용  
