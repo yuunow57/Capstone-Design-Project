@@ -10,7 +10,13 @@ pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
 ## 📁 폴더 구조  
 ```
 📦 Capstone_Design_Project  
-┣ 📂 PyQt_GUI              # GUI 실행 및 화면 관리 (stack.py 등)  
+┣ 📂 PyQt_GUI              # GUI 로직 관리
+┃  ┣ 📜 stack.py                # GUI 실행 및 화면 전환 관리
+┃  ┣ 📜 dashboard.ui            # 대시보드 UI
+┃  ┣ 📜 sungp.ui                # 태양광 발전 현황 모니터링 UI
+┃  ┣ 📜 battery.ui              # 이차전지 모듈 현황 모니터링 UI
+┃  ┣ 📜 setting.ui              # 설정 UI
+┃  ┗ 📜 information.ui          # 정보 UI
 ┗ 📂 PyQt_Service          # 기능 로직 관리  
    ┣ 📂 Dashboard               # 대시보드 페이지 관련 로직  
    ┣ 📂 Monitoring              # 모니터링 페이지 관련 로직  
