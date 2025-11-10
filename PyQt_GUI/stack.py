@@ -4,7 +4,7 @@
 from PyQt5 import QtWidgets, uic
 import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from battery_graph import BatteryGraphWidget
+# from battery_graph import BatteryGraphWidget
 from PyQt_Service.Setting import SettingController
 
 class StackApp(QtWidgets.QMainWindow):
@@ -26,19 +26,19 @@ class StackApp(QtWidgets.QMainWindow):
 
         # --- 배터리 페이지에 그래프 넣기 ---
         # 프레임 이름 F_1 ~ F_4
-        self.graph_voltage = BatteryGraphWidget(graph_type="voltage")
-        self.graph_current = BatteryGraphWidget(graph_type="current")
-        self.graph_maxcurrent = BatteryGraphWidget(graph_type="maxcurrent")
-        self.graph_total = BatteryGraphWidget(graph_type="total")
+        # self.graph_voltage = BatteryGraphWidget(graph_type="voltage")
+        # self.graph_current = BatteryGraphWidget(graph_type="current")
+        # self.graph_maxcurrent = BatteryGraphWidget(graph_type="maxcurrent")
+        # self.graph_total = BatteryGraphWidget(graph_type="total")
 
         # 각 프레임 안에 넣기
-        for frame, graph in zip(
-            [page_battery.F_1, page_battery.F_2, page_battery.F_3, page_battery.F_4],
-            [self.graph_voltage, self.graph_current, self.graph_maxcurrent, self.graph_total]
-        ):
-            layout = QtWidgets.QVBoxLayout(frame)
-            layout.setContentsMargins(0,0,0,0)  # 프레임에 꽉 차게
-            layout.addWidget(graph)
+        # for frame, graph in zip(
+        #     [page_battery.F_1, page_battery.F_2, page_battery.F_3, page_battery.F_4],
+        #     [self.graph_voltage, self.graph_current, self.graph_maxcurrent, self.graph_total]
+        # ):
+        #     layout = QtWidgets.QVBoxLayout(frame)
+        #     layout.setContentsMargins(0,0,0,0)  # 프레임에 꽉 차게
+        #     layout.addWidget(graph)
 
 
         self.setting_controller = SettingController(page_setting)
