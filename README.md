@@ -45,7 +45,7 @@ pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
 8. 실제 수집된 데이터를 표(csv)로 보여주는 버튼
 
 ## 3️⃣ 이차전지 모듈 상태 모니터링
-1. 위 태양광 발전 현황 모니터링과 동일하며, 보여주는 데이터는 1S, 2S, 3S, Total 배터리 전압
+1. 위 태양광 발전 현황 모니터링과 동일하며, 보여주는 데이터는 1S, 2S, 3S, Total 배터리 전압? 충전율?
 
 ## 4️⃣ 설정
 1. USB 포트를 변경하는 드롭 박스
