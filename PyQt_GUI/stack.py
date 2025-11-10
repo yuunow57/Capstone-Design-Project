@@ -87,9 +87,9 @@ class StackApp(QtWidgets.QMainWindow):
         idx = self.pages.index(page)
         for i, btn in enumerate(self.buttons):
             if i == idx:
-                btn.setStyleSheet("color: red; font-weight: bold;")
+                btn.setStyleSheet("color: #9E1010; font-weight: bold;")
             else:
-                btn.setStyleSheet("color: black; font-weight: normal;")
+                btn.setStyleSheet("color: #33333; font-weight: normal;")
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

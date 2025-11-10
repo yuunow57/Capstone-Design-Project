@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1280</width>
-    <height>833</height>
+    <width>1184</width>
+    <height>803</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -31,13 +31,15 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>251</width>
+      <width>201</width>
       <height>801</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color :#5dade2;
-border-radius: 10px;</string>
+     <string notr="true">background-color :#E7EFF8;
+border-radius: 10px;
+margin:0;
+spacing:0;</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -48,13 +50,16 @@ border-radius: 10px;</string>
     <widget class="QWidget" name="verticalLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>-1</y>
-       <width>251</width>
-       <height>501</height>
+       <x>10</x>
+       <y>0</y>
+       <width>191</width>
+       <height>421</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
       <property name="sizeConstraint">
        <enum>QLayout::SetDefaultConstraint</enum>
       </property>
@@ -78,11 +83,12 @@ border-radius: 10px;</string>
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: black;
+         <string notr="true">text-align: left; 
+color: #333333;
 border-radius: 8px;</string>
         </property>
         <property name="text">
-         <string>대시보드</string>
+         <string> 대시보드</string>
         </property>
        </widget>
       </item>
@@ -103,12 +109,12 @@ border-radius: 8px;</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">
-color: #black;
+         <string notr="true">text-align: left; 
+color: #333333;;
 border-radius: 8px;</string>
         </property>
         <property name="text">
-         <string>태양광발전 현황 M</string>
+         <string> 태양광발전 현황 M</string>
         </property>
         <property name="iconSize">
          <size>
@@ -135,11 +141,11 @@ border-radius: 8px;</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: black;
-</string>
+         <string notr="true">color: #333333;;
+text-align: left; </string>
         </property>
         <property name="text">
-         <string>이차전지 모듈 상태 M</string>
+         <string> 이차전지 모듈 상태 M</string>
         </property>
        </widget>
       </item>
@@ -160,11 +166,12 @@ border-radius: 8px;</string>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: black;
-border-radius: 8px;</string>
+         <string notr="true">color: #333333;
+border-radius: 8px;
+text-align: left; </string>
         </property>
         <property name="text">
-         <string>설정</string>
+         <string> 설정</string>
         </property>
        </widget>
       </item>
@@ -178,58 +185,40 @@ border-radius: 8px;</string>
         </property>
         <property name="font">
          <font>
-          <family>Adobe 고딕 Std B</family>
+          <family>Agency FB</family>
           <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
         <property name="styleSheet">
          <string notr="true">color: black;
-border-radius: 8px;</string>
+border-radius: 8px;
+text-align: left; </string>
         </property>
         <property name="text">
-         <string>정보</string>
+         <string>  정보</string>
         </property>
        </widget>
       </item>
      </layout>
     </widget>
-    <widget class="QPushButton" name="pushButton_7">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>710</y>
-       <width>249</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Adobe 고딕 Std B</family>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: black;
-border-radius: 8px;</string>
-     </property>
-     <property name="text">
-      <string>정보</string>
-     </property>
-    </widget>
     <widget class="QWidget" name="verticalLayoutWidget_2">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>710</y>
-       <width>251</width>
-       <height>61</height>
+       <width>191</width>
+       <height>91</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
       <item>
        <widget class="QPushButton" name="pushButton_6">
         <property name="font">
@@ -255,15 +244,14 @@ border-radius: 8px;</string>
    <widget class="QFrame" name="frame_2">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>190</x>
       <y>0</y>
-      <width>1011</width>
+      <width>1081</width>
       <height>801</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 1px solid rgba(37,150,190,0.9); 
-           </string>
+     <string notr="true">background-color : #FFFFFF;</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -274,11 +262,14 @@ border-radius: 8px;</string>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>0</y>
-       <width>1031</width>
+       <width>991</width>
        <height>801</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color : #F9FAFB;</string>
      </property>
      <property name="currentIndex">
       <number>0</number>
@@ -301,7 +292,7 @@ border-radius: 8px;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color :#5dade2;</string>
+        <string notr="true">background-color : #F9FAFB;</string>
        </property>
        <property name="text">
         <string>태양광·이차전지 연계형 에너지 관리 플랫폼</string>
@@ -313,7 +304,7 @@ border-radius: 8px;</string>
       <widget class="QLabel" name="label_2">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>90</x>
          <y>150</y>
          <width>411</width>
          <height>51</height>
@@ -325,13 +316,13 @@ border-radius: 8px;</string>
         </font>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;배터리 잔량&lt;/span&gt;: 배터리 잔량: S1% / S2% / S3% / Total&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;배터리 잔량&lt;/span&gt;: &lt;span style=&quot; font-weight:600;&quot;&gt;배터리 잔량: S1% / S2% / S3% / Total&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
-         <x>600</x>
+         <x>610</x>
          <y>150</y>
          <width>361</width>
          <height>51</height>
@@ -343,14 +334,14 @@ border-radius: 8px;</string>
         </font>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;현재 시각&lt;/span&gt;: 현재 시각: hh:mm:ss&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;현재 시각&lt;/span&gt;:&lt;span style=&quot; font-weight:600; color:#00ac00;&quot;&gt;20:32:10&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_4">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>300</y>
+         <x>90</x>
+         <y>220</y>
          <width>411</width>
          <height>51</height>
         </rect>
@@ -361,14 +352,14 @@ border-radius: 8px;</string>
         </font>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;부하 전력&lt;/span&gt;: 부하 전력: 12.6V&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;부하전력:&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt; 12.6V&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_5">
        <property name="geometry">
         <rect>
-         <x>600</x>
-         <y>300</y>
+         <x>610</x>
+         <y>220</y>
          <width>361</width>
          <height>51</height>
         </rect>
@@ -379,13 +370,13 @@ border-radius: 8px;</string>
         </font>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;연결 상태&lt;/span&gt;: 연결 상태: 정상/끊김&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;연결 상태&lt;/span&gt;: &lt;span style=&quot; color:#0014a9;&quot;&gt;연결 상태: 정상/끊김&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
       <widget class="QFrame" name="frame_3">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>70</x>
          <y>460</y>
          <width>411</width>
          <height>281</height>
@@ -434,8 +425,8 @@ border-radius: 8px;</string>
       <widget class="QLabel" name="label_6">
        <property name="geometry">
         <rect>
-         <x>600</x>
-         <y>520</y>
+         <x>580</x>
+         <y>530</y>
          <width>361</width>
          <height>51</height>
         </rect>
@@ -446,7 +437,7 @@ border-radius: 8px;</string>
         </font>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;경고 메시지&lt;/span&gt;: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;경고 메시지: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </widget>
@@ -454,7 +445,6 @@ border-radius: 8px;</string>
     </widget>
    </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
