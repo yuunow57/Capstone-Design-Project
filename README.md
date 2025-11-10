@@ -19,6 +19,14 @@ pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
 ┃  ┗ 📜 information.ui          # 정보 UI
 ┗ 📂 PyQt_Service          # 기능 로직 관리  
    ┣ 📂 Dashboard               # 대시보드 페이지 관련 로직  
+   ┃  ┣ 📜 __init__.py                  # 패키지 초기화
+   ┃  ┣ 📜 battery_status_manager.py    # 3개 배터리 모듈의 충전 상태 표시 및 갱신
+   ┃  ┣ 📜 clock_manager.py             # 현재 시각을 hh:mm:ss 형식으로 실시간 표시
+   ┃  ┣ 📜 connection_status_manager.py # 시스템 연결 상태 모니터링 및 표시
+   ┃  ┣ 📜 dashboard_controller.py      # 대시보드 전체 기능 통합 제어
+   ┃  ┣ 📜 dashboard_graph_manager.py   # 전압,전류,전력량 그래프 관리 및 시각화
+   ┃  ┣ 📜 load_power_manager.py        # 태양광 데이터 기반 실시간 부하 전력 표시
+   ┃  ┗ 📜 warning_manager.py           # 이상 상태 감지 및 경고 메시지 표시
    ┣ 📂 Monitoring              # 모니터링 페이지 관련 로직  
    ┃  ┣ 📂 sample                       # csv 샘플 데이터
    ┃  ┣ 📜 __init__.py                  # 패키지 초기화
@@ -27,7 +35,7 @@ pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
    ┃  ┣ 📜 data_resampler.py            # 시간 주기별 데이터 리샘플링 (1분, 10분, 1시간, 24시간)
    ┃  ┣ 📜 graph_manager.py             # Matplotlib 기반 그래프 표시 및 갱신 
    ┃  ┣ 📜 monitoring_controller.py     # 모듈 통합 제어
-   ┃  ┣ 📜 view_manager.py              # 드롭박스/버튼 이벤트 관리 및 그래프 업데이트 로직
+   ┃  ┗ 📜 view_manager.py              # 드롭박스/버튼 이벤트 관리 및 그래프 업데이트 로직
    ┗ 📂 Setting                 # 설정 페이지 관련 로직  
       ┣ 📜 __init__.py                  # 패키지 초기화  
       ┣ 📜 setting_controller.py        # 설정 페이지의 중앙 컨트롤러  
@@ -43,12 +51,12 @@ pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
 ## 구현할 기능 및 현재 진행 상황
 
 ### 1️⃣ 대시보드
-1. 배터리 모듈 3개의 충전량을 각각 표시
-2. 현재 시각을 hh:mm:ss로 실시간 표시
-3. 부하 전력 표시
-4. 연결 상태를 정상/끊어짐 표시
-5. 전압, 전류, 최대 전류, 누적 전력을 하나의 미니 그래프로 표시
-6. 경고 메시지 표시/ 없으면 정상
+1. ✅ 배터리 모듈 3개의 충전량을 각각 표시
+2. ✅ 현재 시각을 hh:mm:ss로 실시간 표시
+3. ❌ 부하 전력 표시
+4. ❌ 연결 상태를 정상/끊어짐 표시
+5. ✅ 전압, 전류, 전력량을 하나의 미니 그래프로 표시
+6. ❌ 경고 메시지 표시/ 없으면 정상
 
 ### 2️⃣ 태양광 발전 현황 모니터링
 1. ✅ 그래프의 데이터 주기 단위를 설정하기 위한 Pandas를 이용한 데이터 그룹화 (1m, 10m, 1h, 1d)
