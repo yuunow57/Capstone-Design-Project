@@ -1,75 +1,44 @@
 from PyQt5 import QtWidgets
-from PyQt_Service.Monitoring.data_loader import DataLoader
-from PyQt_Service.Monitoring.data_resampler import DataResampler
-from PyQt_Service.Monitoring.graph_manager import GraphManager
-
+from PyQt5.QtCore import QTimer
+from .clock_manager import ClockManager
+from .battery_status_manager import BatteryStatusManager
+from .load_power_manager import LoadPowerManager
+from .connection_status_manager import ConnectionStatusManager
+from .warning_manager import WarningManager
+from .dashboard_graph_manager import DashboardGraphManager
 
 class DashboardController:
-    """
-    대시보드 미니그래프 관리 컨트롤러
-    (Monitoring 모듈의 그래프 로직을 재활용)
-    """
-    def __init__(self, ui, csv_path):
-        self.ui = ui
+    """대시보드 페이지 총괄"""
+    def __init__(self, ui_root: QtWidgets.QWidget, csv_path: str):
+        self.ui_root = ui_root
         self.csv_path = csv_path
-        self.df = DataLoader(csv_path).load()
+        print("🎨 대시보드 컨트롤러 초기화 시작")
 
-        self.init_graph()
+        # 필요한 위젯들을 objectName으로 찾아서 보관
+        self.lbl_soc  = self.ui_root.findChild(QtWidgets.QLabel,  "label_2")
+        self.lbl_time = self.ui_root.findChild(QtWidgets.QLabel,  "label_3")
+        self.lbl_load = self.ui_root.findChild(QtWidgets.QLabel,  "label_4")
+        self.lbl_conn = self.ui_root.findChild(QtWidgets.QLabel,  "label_5")
+        self.lbl_warn = self.ui_root.findChild(QtWidgets.QLabel,  "label_6")
+        self.graph_host = self.ui_root.findChild(QtWidgets.QWidget, "widget_graph_area")
 
-    def init_graph(self):
-        print("🎨 대시보드 그래프 초기화 시작")
+        # 매니저들은 위젯을 직접 주입받는다
+        self.clock          = ClockManager(self.lbl_time)
+        self.battery_status = BatteryStatusManager(self.lbl_soc,  csv_path)
+        self.load_power     = LoadPowerManager(self.lbl_load,     csv_path)
+        self.connection     = ConnectionStatusManager(self.lbl_conn)
+        self.warning        = WarningManager(self.lbl_warn)
+        self.graph          = DashboardGraphManager(self.graph_host, csv_path)
 
-        if not hasattr(self.ui, "widget_graph_area"):
-            print("❌ widget_graph_area 속성이 없습니다!")
-            return
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.update_dashboard)
+        self.timer.start(1000)
 
-        layout = QtWidgets.QVBoxLayout(self.ui.widget_graph_area)
-        layout.setContentsMargins(0, 0, 0, 0)
-        self.graph = GraphManager(self.ui.widget_graph_area)
-        layout.addWidget(self.graph)
-
-        self.update_graph()
-
-    def update_graph(self):
-        res = DataResampler(self.df).resample("1시간")  # 1시간 주기 리샘플
-        if res.empty:
-            print("⚠️ 데이터프레임이 비어있습니다.")
-            return
-
-        # ✅ CSV 실제 컬럼명 → 표준 이름으로 매핑
-        res = res.rename(columns={
-            "일시": "timestamp",
-            "전압(V)": "전압",
-            "전류(A)": "전류",
-            "출력(W)": "전력량"
-        })
-
-        # ✅ 필요한 컬럼만 선택 (존재하는지 확인 후)
-        required_cols = ["timestamp", "전압", "전류", "전력량"]
-        missing = [col for col in required_cols if col not in res.columns]
-        if missing:
-            print(f"⚠️ 누락된 컬럼: {missing}")
-            return
-
-        filtered = res[required_cols]
-
-        # ✅ 그래프 초기화 및 스타일 설정
-        self.graph.ax.clear()
-        self.graph.ax.plot(filtered["timestamp"], filtered["전압"], color="#930B0D")
-        self.graph.ax.plot(filtered["timestamp"], filtered["전류"], color="#0C6AA4")
-        self.graph.ax.plot(filtered["timestamp"], filtered["전력량"], color="#4C934C")
-
-        # ✅ Y축: 0부터 시작, 정수 단위 눈금 설정
-        self.graph.ax.set_ylim(bottom=0)
-        self.graph.ax.yaxis.get_major_locator().set_params(integer=True)
-
-        # ✅ X축 표시 형식 (시간만)
-        import matplotlib.dates as mdates
-        self.graph.ax.xaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
-
-        self.graph.ax.tick_params(axis="x", labelrotation=30)
-        self.graph.ax.grid(True, linestyle="--", alpha=0.3)
-        self.graph.ax.legend(fontsize=8, loc="upper right")
-
-        self.graph.draw()
-
+    def update_dashboard(self):
+        # 각 위젯이 존재할 때만 업데이트 (None 안전)
+        if self.lbl_time: self.clock.update_time()
+        if self.lbl_soc:  self.battery_status.update_status()
+        if self.lbl_load: self.load_power.update_value()
+        if self.lbl_conn: self.connection.update_status()
+        if self.lbl_warn: self.warning.update_message()
+        if self.graph_host: self.graph.update_graph()

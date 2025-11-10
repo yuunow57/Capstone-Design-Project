@@ -1,9 +1,9 @@
-
 from PyQt5 import QtWidgets, uic
 import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from PyQt_Service.Setting import SettingController
 from PyQt_Service.Monitoring import MonitoringController
+from PyQt_Service.Dashboard import DashboardController
 
 class StackApp(QtWidgets.QMainWindow):
     def __init__(self):
@@ -30,6 +30,8 @@ class StackApp(QtWidgets.QMainWindow):
         
         self.sungp_controller   = MonitoringController(page_sungp, sungp_csv)
         self.battery_controller = MonitoringController(page_battery, battery_csv)
+
+        self.dashboard_controller = DashboardController(dashboard_page, sungp_csv)
 
         # stackedWidget에 추가
         self.stack.addWidget(page_sungp)
