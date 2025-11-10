@@ -15,12 +15,7 @@ class ViewManager:
 
         # 그래프 4개 생성 및 프레임에 삽입 (F_1~F_4)
         titles, ylabels = self._graph_titles_and_labels()
-        self.graphs = [
-            GraphManager(title=titles[0], ylabel=ylabels[0]),
-            GraphManager(title=titles[1], ylabel=ylabels[1]),
-            GraphManager(title=titles[2], ylabel=ylabels[2]),
-            GraphManager(title=titles[3], ylabel=ylabels[3]),
-        ]
+        self.graphs = [GraphManager(), GraphManager(), GraphManager(), GraphManager()]
         frames = [self.ui.frame, self.ui.frame_3, self.ui.frame_2, self.ui.frame_4]
         for fr, g in zip(frames, self.graphs):
             lay = QtWidgets.QVBoxLayout(fr)
@@ -33,6 +28,22 @@ class ViewManager:
 
         # 초기 렌더
         self.update_graphs()
+
+    def _series_and_colors(self):    
+        if self.schema == "battery":
+            return [
+                ("1S Voltage",        "#930B0D"),
+                ("2S Voltage",        "#0C6AA4"),
+                ("3S Voltage",        "#4C934C"),
+                ("Total Voltage",     "#740399"),
+            ]
+        else:  # solar
+            return [
+                ("전압(V)",           "#930B0D"),
+                ("전류(A)",           "#0C6AA4"),
+                ("전력량(W)",         "#4C934C"),
+                ("누적 전력량(Wh)",   "#740399"),
+            ]
 
     def _graph_titles_and_labels(self):
         """
@@ -52,9 +63,10 @@ class ViewManager:
     def update_graphs(self):
         period = self.ui.comboBox_interval.currentText()
         res = DataResampler(self.df).resample(period)
-        ycols = self._y_columns()
-        for g, y in zip(self.graphs, ycols):
-            g.update_graph(res, y_col=y, title=y)
+
+        series = self._series_and_colors()
+        for g, (y_col, color) in zip(self.graphs, series):
+            g.update_graph(res, y_col=y_col, color_hex=color)
 
     def show_csv(self):
         CSVExporter(self.df).show_table()
