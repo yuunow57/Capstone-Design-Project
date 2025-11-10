@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1280</width>
-    <height>841</height>
+    <height>1125</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,10 +25,10 @@
    <widget class="QWidget" name="SolarMonitor" native="true">
     <property name="geometry">
      <rect>
-      <x>-30</x>
-      <y>49</y>
+      <x>-20</x>
+      <y>50</y>
       <width>1280</width>
-      <height>821</height>
+      <height>831</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -51,17 +51,17 @@
       <rect>
        <x>570</x>
        <y>50</y>
-       <width>471</width>
-       <height>311</height>
+       <width>481</width>
+       <height>361</height>
       </rect>
      </property>
      <widget class="PlotWidget" name="frame_3">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>10</x>
         <y>50</y>
-        <width>450</width>
-        <height>250</height>
+        <width>470</width>
+        <height>270</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -105,16 +105,16 @@
        <x>30</x>
        <y>50</y>
        <width>491</width>
-       <height>311</height>
+       <height>361</height>
       </rect>
      </property>
      <widget class="PlotWidget" name="frame">
       <property name="geometry">
        <rect>
-        <x>19</x>
+        <x>8</x>
         <y>49</y>
-        <width>450</width>
-        <height>250</height>
+        <width>470</width>
+        <height>270</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -161,16 +161,16 @@
        <x>30</x>
        <y>400</y>
        <width>491</width>
-       <height>301</height>
+       <height>331</height>
       </rect>
      </property>
      <widget class="PlotWidget" name="frame_2">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>10</x>
         <y>50</y>
-        <width>450</width>
-        <height>250</height>
+        <width>470</width>
+        <height>270</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -217,16 +217,16 @@
        <x>570</x>
        <y>400</y>
        <width>481</width>
-       <height>301</height>
+       <height>321</height>
       </rect>
      </property>
      <widget class="PlotWidget" name="frame_4">
       <property name="geometry">
        <rect>
-        <x>19</x>
-        <y>49</y>
-        <width>450</width>
-        <height>250</height>
+        <x>10</x>
+        <y>50</y>
+        <width>470</width>
+        <height>270</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -264,22 +264,25 @@
       </property>
      </widget>
     </widget>
-    <widget class="QComboBox" name="comboBox_interval">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>10</y>
-       <width>251</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QComboBox {
+   </widget>
+   <widget class="QComboBox" name="comboBox_interval">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>30</y>
+      <width>271</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox {
     background: #ffffff;
     color: #1d232f;
     border: 1px solid #d7dde8;
     border-radius: 8px;
     padding: 6px 30px 6px 10px;
+   font-family: &quot;Noto Sans KR&quot;;
+   font-weight: 700;       
 }
 QComboBox:hover {
     border-color: #bfc8d8;
@@ -308,47 +311,49 @@ QComboBox QAbstractItemView {
     selection-color: #1d232f;
 }
 </string>
+    </property>
+    <item>
+     <property name="text">
+      <string>1분</string>
      </property>
-     <item>
-      <property name="text">
-       <string>1분</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>10분</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>1시간</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>24시간</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QPushButton" name="btn_show_csv">
-     <property name="geometry">
-      <rect>
-       <x>560</x>
-       <y>10</y>
-       <width>181</width>
-       <height>31</height>
-      </rect>
+    </item>
+    <item>
+     <property name="text">
+      <string>10분</string>
      </property>
-     <property name="styleSheet">
-      <string notr="true"> background: #ffffff;
+    </item>
+    <item>
+     <property name="text">
+      <string>1시간</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>24시간</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="btn_show_csv">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>30</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"> background: #ffffff;
     color: #1d232f;
     border: 1px solid #d7dde8;
-    border-radius: 8px;</string>
-     </property>
-     <property name="text">
-      <string>CSV</string>
-     </property>
-    </widget>
+    border-radius: 8px;
+  font-family: &quot;Noto Sans KR&quot;;
+   font-weight: 700;    
+   text-align: center;      </string>
+    </property>
+    <property name="text">
+     <string>CSV</string>
+    </property>
    </widget>
   </widget>
  </widget>

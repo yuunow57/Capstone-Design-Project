@@ -3,6 +3,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
+
 class GraphManager(FigureCanvas):
     """
     - 그래프 제목 제거 (GUI 쪽 라벨 사용)
@@ -11,7 +12,7 @@ class GraphManager(FigureCanvas):
     - 배경 투명, 그리드/테두리 정리
     """
     def __init__(self, parent=None):
-        self.fig, self.ax = plt.subplots(figsize=(5, 3), dpi=100)
+        self.fig, self.ax = plt.subplots(figsize=(3, 1), dpi=100)
         super().__init__(self.fig)
         if parent is not None:
             self.setParent(parent)
@@ -35,6 +36,9 @@ class GraphManager(FigureCanvas):
         # 축/눈금/그리드
         self.ax.tick_params(axis="x", labelrotation=30)
         self.ax.grid(True, linestyle="--", alpha=0.3)
+
+        self.ax.set_ylim(bottom=0)
+    
 
         # 테두리 얇게
         for spine in self.ax.spines.values():
