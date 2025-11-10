@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1274</width>
+    <width>1112</width>
     <height>800</height>
    </rect>
   </property>
@@ -16,14 +16,20 @@
   <widget class="QFrame" name="frame_main">
    <property name="geometry">
     <rect>
-     <x>-20</x>
-     <y>-20</y>
+     <x>0</x>
+     <y>10</y>
      <width>1071</width>
      <height>771</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">background-color : #F9FAFB;
+   color: #1d232f;
+   border-radius: 8px;
+   font-family: &quot;Noto Sans KR&quot;;
+   font-weight: 700;    
+   text-align: center;      
+ </string>
    </property>
    <property name="frameShape">
     <enum>QFrame::Box</enum>
@@ -34,21 +40,22 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>670</y>
+      <x>100</x>
+      <y>660</y>
       <width>321</width>
-      <height>28</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <family>Noto Sans KR</family>
       <pointsize>12</pointsize>
-      <weight>75</weight>
+      <weight>87</weight>
       <bold>true</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 1px solid rgba(37,150,190,0.9); </string>
+     <string notr="true">border: 1px solid#333333;</string>
     </property>
     <property name="text">
      <string>적용하기 (Save)</string>
@@ -57,114 +64,25 @@
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>640</x>
-      <y>670</y>
+      <x>650</x>
+      <y>660</y>
       <width>321</width>
-      <height>28</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <family>Noto Sans KR</family>
       <pointsize>12</pointsize>
-      <weight>75</weight>
+      <weight>87</weight>
       <bold>true</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 1px solid rgba(37,150,190,0.9); </string>
+     <string notr="true">border: 1px solid#333333;</string>
     </property>
     <property name="text">
      <string>기본값 복원 (Default)</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_9">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>50</y>
-      <width>211</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>15</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color :#5dade2;
-color: black;                  
-font-weight: bold;             
-border-radius: 5px;            
-border: 1px solid rgba(37,150,190,0.9); </string>
-    </property>
-    <property name="text">
-     <string>데이터 수집 설정</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_10">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>350</y>
-      <width>211</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>15</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color :#5dade2;
-color: black;                  
-font-weight: bold;             
-border-radius: 5px;            
-border: 1px solid rgba(37,150,190,0.9); </string>
-    </property>
-    <property name="text">
-     <string>배터리 관리 설정</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_11">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>350</y>
-      <width>171</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>15</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color :#5dade2;
-color: black;                  
-font-weight: bold;             
-border-radius: 5px;            
-border: 1px solid rgba(37,150,190,0.9); </string>
-    </property>
-    <property name="text">
-     <string>센서 및 보정</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QFrame" name="frame">
@@ -177,7 +95,7 @@ border: 1px solid rgba(37,150,190,0.9); </string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 1px solid rgba(37,150,190,0.9); </string>
+     <string notr="true">border: 1px solid#333333; </string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -189,38 +107,85 @@ border: 1px solid rgba(37,150,190,0.9); </string>
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>90</y>
+       <y>80</y>
        <width>161</width>
-       <height>20</height>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <family>Noto Sans KR</family>
        <pointsize>12</pointsize>
-       <weight>75</weight>
+       <weight>87</weight>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+    padding: 6px 30px 6px 10px;</string>
      </property>
      <property name="text">
       <string>USB 포트 선택:</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QComboBox" name="comboBox_2">
      <property name="geometry">
       <rect>
-       <x>620</x>
-       <y>90</y>
+       <x>610</x>
+       <y>80</y>
        <width>391</width>
-       <height>22</height>
+       <height>31</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <family>Noto Sans KR</family>
        <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QComboBox {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+    padding: 6px 30px 6px 10px;
+}
+QComboBox:hover {
+    border-color: #bfc8d8;
+}
+QComboBox:focus {
+    border: 1px solid #4b8cff;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 24px;
+    border-left: 1px solid #d7dde8;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: #f7f9fc;
+}
+QComboBox::down-arrow {
+    image: url(:/icons/chevron-down-dark.svg);
+    width: 12px;
+    height: 12px;
+}
+QComboBox QAbstractItemView {
+    background: #ffffff;
+    border: 1px solid #d7dde8;
+    selection-background-color: #e8f2ff;
+    selection-color: #1d232f;
+}
+</string>
      </property>
      <property name="currentIndex">
       <number>0</number>
@@ -244,18 +209,26 @@ border: 1px solid rgba(37,150,190,0.9); </string>
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>160</y>
-       <width>121</width>
-       <height>28</height>
+       <x>50</x>
+       <y>150</y>
+       <width>161</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <family>Noto Sans KR</family>
        <pointsize>12</pointsize>
-       <weight>75</weight>
+       <weight>87</weight>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+    padding: 6px 30px 6px 10px;</string>
      </property>
      <property name="text">
       <string>통신 재연결</string>
@@ -264,19 +237,56 @@ border: 1px solid rgba(37,150,190,0.9); </string>
     <widget class="QPushButton" name="btn_reconnect_2">
      <property name="geometry">
       <rect>
-       <x>760</x>
-       <y>160</y>
-       <width>121</width>
+       <x>610</x>
+       <y>150</y>
+       <width>391</width>
        <height>31</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <family>Noto Sans KR</family>
        <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+    padding: 6px 30px 6px 10px;</string>
      </property>
      <property name="text">
       <string>Reconnect</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>20</y>
+       <width>221</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>15</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>데이터 수집 설정</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
@@ -286,11 +296,18 @@ border: 1px solid rgba(37,150,190,0.9); </string>
       <x>20</x>
       <y>330</y>
       <width>481</width>
-      <height>241</height>
+      <height>261</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Noto Sans KR</family>
+      <weight>87</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">border: 1px solid rgba(37,150,190,0.9); </string>
+     <string notr="true">border: 1px solid#333333;</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -302,56 +319,56 @@ border: 1px solid rgba(37,150,190,0.9); </string>
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>150</y>
-       <width>151</width>
-       <height>21</height>
+       <y>180</y>
+       <width>221</width>
+       <height>45</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <family>Noto Sans KR</family>
        <pointsize>12</pointsize>
-       <weight>75</weight>
+       <weight>87</weight>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+    padding: 6px 30px 6px 10px;</string>
      </property>
      <property name="text">
       <string>임계 전압 조정</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_7">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>150</y>
-       <width>20</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>V</string>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="edit_threshold_voltage">
      <property name="geometry">
       <rect>
-       <x>230</x>
-       <y>150</y>
-       <width>50</width>
-       <height>21</height>
+       <x>300</x>
+       <y>180</y>
+       <width>100</width>
+       <height>45</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <family>Noto Sans KR</family>
        <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true"> background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+    padding: 6px 30px 6px 10px;</string>
+     </property>
      <property name="text">
-      <string>3.2</string>
+      <string>3.2V</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -360,24 +377,29 @@ border: 1px solid rgba(37,150,190,0.9); </string>
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>50</x>
        <y>80</y>
-       <width>171</width>
-       <height>25</height>
+       <width>221</width>
+       <height>45</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <family>Noto Sans KR</family>
        <pointsize>12</pointsize>
-       <weight>75</weight>
+       <weight>87</weight>
        <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true"> background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+    padding: 6px 30px 6px 10px;</string>
      </property>
      <property name="text">
-      <string>배터리 충전 한계:</string>
+      <string>배터리 충전 한계</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -386,40 +408,56 @@ border: 1px solid rgba(37,150,190,0.9); </string>
     <widget class="QLineEdit" name="edit_battery_limit">
      <property name="geometry">
       <rect>
-       <x>230</x>
+       <x>300</x>
        <y>80</y>
-       <width>50</width>
-       <height>25</height>
+       <width>100</width>
+       <height>45</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <family>Noto Sans KR</family>
        <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true"> background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+    padding: 6px 30px 6px 10px;</string>
+     </property>
      <property name="text">
-      <string>85</string>
+      <string>85%</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="label_5">
+    <widget class="QLabel" name="label_10">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>80</y>
-       <width>20</width>
-       <height>25</height>
+       <x>140</x>
+       <y>10</y>
+       <width>211</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>12</pointsize>
+       <family>Noto Sans KR</family>
+       <pointsize>15</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="text">
-      <string>%</string>
+      <string>배터리 관리 설정</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -429,14 +467,14 @@ border: 1px solid rgba(37,150,190,0.9); </string>
    <widget class="QFrame" name="frame_3">
     <property name="geometry">
      <rect>
-      <x>600</x>
+      <x>570</x>
       <y>330</y>
-      <width>421</width>
-      <height>241</height>
+      <width>481</width>
+      <height>261</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 1px solid rgba(37,150,190,0.9); </string>
+     <string notr="true">border: 1px solid#333333;</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -447,18 +485,26 @@ border: 1px solid rgba(37,150,190,0.9); </string>
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>70</x>
+       <x>60</x>
        <y>130</y>
-       <width>91</width>
-       <height>28</height>
+       <width>131</width>
+       <height>55</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <family>Noto Sans KR</family>
        <pointsize>12</pointsize>
-       <weight>75</weight>
+       <weight>87</weight>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">   background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+</string>
      </property>
      <property name="text">
       <string>센서 리셋</string>
@@ -467,19 +513,58 @@ border: 1px solid rgba(37,150,190,0.9); </string>
     <widget class="QPushButton" name="btn_reconnect">
      <property name="geometry">
       <rect>
-       <x>220</x>
+       <x>240</x>
        <y>130</y>
-       <width>141</width>
-       <height>31</height>
+       <width>151</width>
+       <height>55</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <family>Noto Sans KR</family>
        <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;</string>
      </property>
      <property name="text">
       <string>Reset Sensor</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>10</y>
+       <width>261</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>15</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="midLineWidth">
+      <number>-2</number>
+     </property>
+     <property name="text">
+      <string>센서 및 보정</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
@@ -488,9 +573,6 @@ border: 1px solid rgba(37,150,190,0.9); </string>
    <zorder>frame_3</zorder>
    <zorder>pushButton_2</zorder>
    <zorder>pushButton_3</zorder>
-   <zorder>label_9</zorder>
-   <zorder>label_10</zorder>
-   <zorder>label_11</zorder>
   </widget>
  </widget>
  <resources/>
