@@ -1,11 +1,13 @@
-# 의존성 설치
+# 캡스톤 디자인 : 태양광-이차전지 연계형 에너지 관리 플랫폼
+
+## 의존성 설치
 ```
 pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
 ```
 
 
 
-# 📁 폴더 구조  
+## 📁 폴더 구조  
 ```
 📦 Capstone_Design_Project  
 ┣ 📂 PyQt_GUI              # GUI 실행 및 화면 관리 (stack.py 등)  
@@ -24,9 +26,9 @@ pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
 ```
 
 
-# 구현할 기능 및 현재 진행 상황
+## 구현할 기능 및 현재 진행 상황
 
-## 1️⃣ 대시보드
+### 1️⃣ 대시보드
 1. 배터리 모듈 3개의 충전량을 각각 표시
 2. 현재 시각을 hh:mm:ss로 실시간 표시
 3. 부하 전력 표시
@@ -34,7 +36,7 @@ pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
 5. 전압, 전류, 최대 전류, 누적 전력을 하나의 미니 그래프로 표시
 6. 경고 메시지 표시/ 없으면 정상
 
-## 2️⃣ 태양광 발전 현황 모니터링
+### 2️⃣ 태양광 발전 현황 모니터링
 1. 그래프의 데이터 주기 단위를 설정하기 위한 Pandas를 이용한 데이터 그룹화 (1m, 10m, 1h, 1d)
 2. 1분 주기 데이터는 가장 최근 데이터의 측정 시간을 기준으로 (2시간, 3시간, 4시간, 6시간) 전 까지의 데이터를 matplotlib을 이용해 그래프로 그려냄
 3. 10분 주기 데이터는 가장 최근 데이터의 측정 시간을 기준으로 (6시간, 12시간) 전 까지의 데이터를 matplotlib을 이용해 그래프로 나타냄
@@ -44,10 +46,10 @@ pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
 7. 전압(V), 전류(A), 최대 전류, 누적 전력량을 각각의 칸에 그려낸 그래프를 연동
 8. 실제 수집된 데이터를 표(csv)로 보여주는 버튼
 
-## 3️⃣ 이차전지 모듈 상태 모니터링
+### 3️⃣ 이차전지 모듈 상태 모니터링
 1. 위 태양광 발전 현황 모니터링과 동일하며, 보여주는 데이터는 1S, 2S, 3S, Total 배터리 전압? 충전율?
 
-## 4️⃣ 설정
+### 4️⃣ 설정
 1. USB 포트를 변경하는 드롭 박스
 2. 배터리 충전 한계를 설정하는 입력칸 & 버튼
 3. 센서 리셋 버튼
