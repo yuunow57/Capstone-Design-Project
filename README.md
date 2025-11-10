@@ -1,13 +1,12 @@
+# 의존성 설치
 ```
-의존성 설치
-
 pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
 ```
 
 
-```
-📁 폴더 구조  
 
+# 📁 폴더 구조  
+```
 📦 Capstone_Design_Project  
 ┣ 📂 PyQt_GUI              # GUI 실행 및 화면 관리 (stack.py 등)  
 ┗ 📂 PyQt_Service          # 기능 로직 관리  
