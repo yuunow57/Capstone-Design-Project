@@ -5,7 +5,7 @@ from datetime import timedelta
 class DataResampler:
     """
     주기 리샘플 + 기간 윈도우 자르기
-    - '1분'  : 최근 3시간, 1T
+    - '1분'  : 최근 3시간, 1min
     - '10분' : 최근 6시간, 10T
     - '1시간': 최근 24시간, 1H
     - '24시간': 최근 7일, 24H (일 단위)
