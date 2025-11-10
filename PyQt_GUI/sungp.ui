@@ -42,9 +42,7 @@
    color: #1d232f;
    border-radius: 8px;
    font-family: &quot;Noto Sans KR&quot;;
-   font-weight: 700;    
-   text-align: center;      
- </string>
+   font-weight: 700;    </string>
     </property>
     <widget class="QWidget" name="widget_5" native="true">
      <property name="geometry">
@@ -298,17 +296,6 @@ QComboBox::drop-down {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     background: #f7f9fc;
-}
-QComboBox::down-arrow {
-    image: url(:/icons/chevron-down-dark.svg);
-    width: 12px;
-    height: 12px;
-}
-QComboBox QAbstractItemView {
-    background: #ffffff;
-    border: 1px solid #d7dde8;
-    selection-background-color: #e8f2ff;
-    selection-color: #1d232f;
 }
 </string>
     </property>

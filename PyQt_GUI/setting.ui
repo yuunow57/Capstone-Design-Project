@@ -158,6 +158,8 @@
     border: 1px solid #d7dde8;
     border-radius: 8px;
     padding: 6px 30px 6px 10px;
+   font-family: &quot;Noto Sans KR&quot;;
+   font-weight: 700;       
 }
 QComboBox:hover {
     border-color: #bfc8d8;
@@ -173,17 +175,6 @@ QComboBox::drop-down {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     background: #f7f9fc;
-}
-QComboBox::down-arrow {
-    image: url(:/icons/chevron-down-dark.svg);
-    width: 12px;
-    height: 12px;
-}
-QComboBox QAbstractItemView {
-    background: #ffffff;
-    border: 1px solid #d7dde8;
-    selection-background-color: #e8f2ff;
-    selection-color: #1d232f;
 }
 </string>
      </property>

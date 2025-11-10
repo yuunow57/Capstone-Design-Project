@@ -30,8 +30,7 @@
    color: #1d232f;
    border-radius: 8px;
    font-family: &quot;Noto Sans KR&quot;;
-   font-weight: 700;          /* Bold 고정 */
-  qproperty-alignment: 'AlignCenter';</string>
+   font-weight: 700;          /* Bold 고정 */</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::StyledPanel</enum>
@@ -114,6 +113,9 @@ border-radius:10px;</string>
      <property name="text">
       <string>프로그램 개요</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="label_8">
      <property name="geometry">
@@ -137,6 +139,9 @@ border-radius:10px;</string>
      </property>
      <property name="text">
       <string>“본 프로그램은 아두이노 기반의 신재생에너지(태양광) 발전 데이터를 수집하고, PyQt GUI를 통해 시각적으로 표시하는 관제용 프로그램입니다.”</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -185,6 +190,9 @@ border-radius:10px;</string>
      <property name="text">
       <string>개발 환경</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="label_10">
      <property name="geometry">
@@ -208,6 +216,9 @@ border-radius:10px;</string>
      </property>
      <property name="text">
       <string>Arduino, Python 3.8, PyQt5, Matplotlib</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -256,6 +267,9 @@ border-radius:10px;</string>
      <property name="text">
       <string>T E A M</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="label_9">
      <property name="geometry">
@@ -275,10 +289,13 @@ border-radius:10px;</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: none;</string>
+      <string notr="true">border: none;  </string>
      </property>
      <property name="text">
       <string>404</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -306,6 +323,9 @@ border-radius:10px;</string>
      </property>
      <property name="text">
       <string>팀장 : 장윤호      팀원: 이강욱, 김혜정, 신성준, 김욱진, 이현석</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -354,6 +374,9 @@ border-radius:10px;</string>
      <property name="text">
       <string>프로그램 버전</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="label_11">
      <property name="geometry">
@@ -377,6 +400,9 @@ border-radius:10px;</string>
      </property>
      <property name="text">
       <string>V 1.0.0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -425,6 +451,9 @@ border-radius:10px;</string>
      <property name="text">
       <string>연락처</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="label_12">
      <property name="geometry">
@@ -448,6 +477,9 @@ border-radius:10px;</string>
      </property>
      <property name="text">
       <string>kit.naver.com</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

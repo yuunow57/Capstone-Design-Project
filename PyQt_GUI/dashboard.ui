@@ -37,9 +37,7 @@
     </property>
     <property name="styleSheet">
      <string notr="true">background-color :#E7EFF8;
-border-radius: 10px;
-margin:0;
-spacing:0;</string>
+border-radius: 10px;</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -450,8 +448,8 @@ border-radius:10px;</string>
        <widget class="QLabel" name="label_8">
         <property name="geometry">
          <rect>
-          <x>40</x>
-          <y>400</y>
+          <x>30</x>
+          <y>390</y>
           <width>16</width>
           <height>16</height>
          </rect>
@@ -474,7 +472,7 @@ border-radius: 8px;</string>
         <property name="geometry">
          <rect>
           <x>60</x>
-          <y>400</y>
+          <y>390</y>
           <width>56</width>
           <height>16</height>
          </rect>
@@ -493,8 +491,8 @@ border-radius: 8px;</string>
        <widget class="QLabel" name="label_9">
         <property name="geometry">
          <rect>
-          <x>120</x>
-          <y>400</y>
+          <x>150</x>
+          <y>390</y>
           <width>16</width>
           <height>16</height>
          </rect>
@@ -510,8 +508,8 @@ border-radius: 8px;</string>
        <widget class="QLabel" name="label_13">
         <property name="geometry">
          <rect>
-          <x>140</x>
-          <y>400</y>
+          <x>180</x>
+          <y>390</y>
           <width>56</width>
           <height>16</height>
          </rect>
@@ -530,8 +528,8 @@ border-radius: 8px;</string>
        <widget class="QLabel" name="label_10">
         <property name="geometry">
          <rect>
-          <x>200</x>
-          <y>400</y>
+          <x>280</x>
+          <y>390</y>
           <width>16</width>
           <height>16</height>
          </rect>
@@ -547,8 +545,8 @@ border-radius: 8px;</string>
        <widget class="QLabel" name="label_14">
         <property name="geometry">
          <rect>
-          <x>220</x>
-          <y>400</y>
+          <x>310</x>
+          <y>390</y>
           <width>56</width>
           <height>16</height>
          </rect>
@@ -564,42 +562,16 @@ border-radius: 8px;</string>
          <string>최대전류</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_11">
+       <widget class="QWidget" name="verticalLayoutWidget_3">
         <property name="geometry">
          <rect>
-          <x>280</x>
-          <y>400</y>
-          <width>16</width>
-          <height>16</height>
+          <x>30</x>
+          <y>410</y>
+          <width>341</width>
+          <height>61</height>
          </rect>
         </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: #740399;
-border-radius: 8px;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_15">
-        <property name="geometry">
-         <rect>
-          <x>310</x>
-          <y>400</y>
-          <width>56</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Agency FB</family>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>누적 전력</string>
-        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3"/>
        </widget>
       </widget>
       <widget class="QLabel" name="label_6">

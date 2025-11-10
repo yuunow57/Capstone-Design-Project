@@ -11,7 +11,7 @@ class DataResampler:
     """
 
     RULE = {
-        "1분":  ("1T", timedelta(hours=3)),
+        "1분":  ("1min", timedelta(hours=3)),
         "10분": ("10T", timedelta(hours=6)),
         "1시간": ("1H", timedelta(hours=24)),
         "24시간": ("1H", timedelta(days=7)),  # 하루를 시간 단위로
@@ -21,7 +21,7 @@ class DataResampler:
         self.df = df.copy()
 
     def resample(self, period: str) -> pd.DataFrame:
-        rule, window = self.RULE.get(period, ("1T", timedelta(hours=3)))
+        rule, window = self.RULE.get(period, ("1min", timedelta(hours=3)))
         if self.df.empty:
             return self.df
 
