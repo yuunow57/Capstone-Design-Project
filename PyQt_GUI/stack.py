@@ -5,7 +5,6 @@ from PyQt5 import QtWidgets, uic
 import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from battery_graph import BatteryGraphWidget
-
 from PyQt_Service.Setting import SettingController
 
 class StackApp(QtWidgets.QMainWindow):
@@ -41,6 +40,7 @@ class StackApp(QtWidgets.QMainWindow):
             layout.setContentsMargins(0,0,0,0)  # 프레임에 꽉 차게
             layout.addWidget(graph)
 
+
         self.setting_controller = SettingController(page_setting)
         
 
@@ -66,6 +66,21 @@ class StackApp(QtWidgets.QMainWindow):
 
         # 초기 페이지
         self.change_page(self.pages[0])
+
+    #
+
+    def update_interval(self, value):
+        print(f"그래프 업데이트 주기 변경: {value}")
+        self.batteryGraph.set_update_interval(value)
+
+    def on_interval_changed(self, page_setting):
+        text = page_setting.comboBox.currentText()
+        print(f"Update interval set to: {text}")
+
+    def on_port_changed(self, page_setting):
+        port = page_setting.comboBox_2.currentText()
+        print(f"Serial port set to: {port}")
+
 
     def change_page(self, page):
         self.stack.setCurrentWidget(page)
