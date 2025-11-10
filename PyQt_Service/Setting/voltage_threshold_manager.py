@@ -16,7 +16,7 @@ class VoltageThresholdManager:
         self.threshold_voltage = None  # 현재 설정된 임계 전압 값
 
         # 버튼 이벤트 연결
-        self.ui.btn_apply_voltage.clicked.connect(self.apply_voltage_threshold)
+        # self.ui.btn_apply_voltage.clicked.connect(self.apply_voltage_threshold)
 
     # -------------------- 임계 전압 적용 --------------------
     def apply_voltage_threshold(self):

@@ -6,6 +6,7 @@ import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # from battery_graph import BatteryGraphWidget
 from PyQt_Service.Setting import SettingController
+from PyQt_Service.Monitoring import MonitoringController
 
 class StackApp(QtWidgets.QMainWindow):
     def __init__(self):
@@ -23,6 +24,9 @@ class StackApp(QtWidgets.QMainWindow):
         page_battery = uic.loadUi(os.path.join(base_path, "battery.ui"))
         page_setting = uic.loadUi(os.path.join(base_path, "setting.ui"))
         page_info = uic.loadUi(os.path.join(base_path, "information.ui"))
+
+        sungp_csv   = os.path.join(base_path, "../PyQt_Service/Monitoring/sample/solar_data.csv")
+        battery_csv = os.path.join(base_path, "../PyQt_Service/Monitoring/sample/battery_data.csv")
 
         # --- 배터리 페이지에 그래프 넣기 ---
         # 프레임 이름 F_1 ~ F_4
@@ -43,6 +47,8 @@ class StackApp(QtWidgets.QMainWindow):
 
         self.setting_controller = SettingController(page_setting)
         
+        self.sungp_controller   = MonitoringController(page_sungp, sungp_csv)
+        self.battery_controller = MonitoringController(page_battery, battery_csv)
 
         # stackedWidget에 추가
         self.stack.addWidget(page_sungp)

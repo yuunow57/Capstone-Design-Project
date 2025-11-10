@@ -13,7 +13,7 @@ pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
 ┣ 📂 PyQt_GUI              # GUI 실행 및 화면 관리 (stack.py 등)  
 ┗ 📂 PyQt_Service          # 기능 로직 관리  
    ┣ 📂 Dashboard               # 대시보드 페이지 관련 로직  
-   ┣ 📂 Graph                   # 모니터링 페이지 관련 로직  
+   ┣ 📂 Monitoring              # 모니터링 페이지 관련 로직  
    ┗ 📂 Setting                 # 설정 페이지 관련 로직  
       ┣ 📜 __init__.py                  # 패키지 초기화  
       ┣ 📜 setting_controller.py        # 설정 페이지의 중앙 컨트롤러  
@@ -43,11 +43,11 @@ pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
 4. 한시간은 주기 데이터는 가장 최근 데이터의 측정 시간을 기준으로 24시간(하루) 전 까지의 데이터를 matplotlib을 이용해 그래프로 나타냄
 5. 하루단위 주기 데이터는 가장 최근 데이터의 측정 시간을 기준으로 7일전(일주일) 전 까지의 데이터를 matplotlib을 이용해 그래프로 나타냄
 6. 위 데이터 들은 그룹시 평균 데이터로 나타내며, GUI에서 드롭박스를 통해 주기를 변경 할 수 있음
-7. 전압(V), 전류(A), 최대 전류, 누적 전력량을 각각의 칸에 그려낸 그래프를 연동
+7. 전압(V), 전류(A), 전력량(W), 누적 전력량을 각각의 칸에 그려낸 그래프를 연동
 8. 실제 수집된 데이터를 표(csv)로 보여주는 버튼
 
 ### 3️⃣ 이차전지 모듈 상태 모니터링
-1. 위 태양광 발전 현황 모니터링과 동일하며, 보여주는 데이터는 1S, 2S, 3S, Total 배터리 전압? 충전율?
+1. 위 태양광 발전 현황 모니터링과 동일하며, 보여주는 데이터는 1S, 2S, 3S, Total 배터리 전압 
 
 ### 4️⃣ 설정
 1. USB 포트를 변경하는 드롭 박스

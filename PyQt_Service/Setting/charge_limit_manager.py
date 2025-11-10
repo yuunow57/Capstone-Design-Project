@@ -16,7 +16,7 @@ class ChargeLimitManager:
         self.charge_limit = None  # 현재 설정된 충전 한계
 
         # 버튼 연결
-        self.ui.pushButton.clicked.connect(self.apply_charge_limit)
+        # self.ui.pushButton.clicked.connect(self.apply_charge_limit)
 
     # -------------------- 충전 한계 적용 --------------------
     def apply_charge_limit(self):
