@@ -94,7 +94,7 @@
        </font>
       </property>
       <property name="text">
-       <string>전류 (A)</string>
+       <string>2 S</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -150,7 +150,7 @@
        <enum>Qt::RightToLeft</enum>
       </property>
       <property name="text">
-       <string>전압 (V)</string>
+       <string>1 S</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -206,7 +206,7 @@
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>최대 전류</string>
+       <string>3 S</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -259,7 +259,7 @@
        </font>
       </property>
       <property name="text">
-       <string>누적 전력</string>
+       <string>Total</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>

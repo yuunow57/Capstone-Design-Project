@@ -13,4 +13,4 @@ class LoadPowerManager:
             return
         latest = self.df.iloc[-1]
         power = latest["전력량(W)"]
-        self.label.setText(f"<b>부하 전력:</b> {power:.2f} W")
+        self.label.setText(f"<b style='font-size:14pt;'>부하 전력: </b> <span style='font-size:14pt;'>{power:.2f} W</span>")

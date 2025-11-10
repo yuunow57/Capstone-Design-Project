@@ -86,6 +86,8 @@ class StackApp(QtWidgets.QMainWindow):
             else:
                 btn.setStyleSheet(style + "color: #333333;")
 
+
+
 def remove_color_from_stylesheet(style):
     import re
     # 기존 style에 color 속성이 있으면 제거

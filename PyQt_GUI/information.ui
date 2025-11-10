@@ -215,7 +215,7 @@ border-radius:10px;</string>
       <string notr="true">border: none;</string>
      </property>
      <property name="text">
-      <string>Arduino, Python 3.8, PyQt5, Matplotlib</string>
+      <string>Arduino, Python 3.8, PyQt5, Matplotlib, Pyserial, Pandas</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -476,7 +476,7 @@ border-radius:10px;</string>
       <string notr="true">border: none;</string>
      </property>
      <property name="text">
-      <string>kit.naver.com</string>
+      <string>yharche40@gmail.com</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -485,25 +485,6 @@ border-radius:10px;</string>
       <bool>true</bool>
      </property>
     </widget>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>640</y>
-      <width>451</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>다운로드.jpg</pixmap>
-    </property>
    </widget>
   </widget>
  </widget>

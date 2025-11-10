@@ -224,6 +224,9 @@ QComboBox::drop-down {
      <property name="text">
       <string>통신 재연결</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
     </widget>
     <widget class="QPushButton" name="btn_reconnect_2">
      <property name="geometry">
@@ -328,10 +331,14 @@ QComboBox::drop-down {
     color: #1d232f;
     border: 1px solid #d7dde8;
     border-radius: 8px;
-    padding: 6px 30px 6px 10px;</string>
+    padding: 6px 30px 6px 10px;
+text-align: center;  </string>
      </property>
      <property name="text">
       <string>임계 전압 조정</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QLineEdit" name="edit_threshold_voltage">
@@ -499,6 +506,9 @@ QComboBox::drop-down {
      </property>
      <property name="text">
       <string>센서 리셋</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QPushButton" name="btn_reconnect">

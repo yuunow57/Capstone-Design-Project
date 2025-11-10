@@ -3,6 +3,8 @@ import pandas as pd, os
 from ..Monitoring.data_resampler import DataResampler
 from ..Monitoring.graph_manager import GraphManager
 
+
+
 class DashboardGraphManager:
     """대시보드의 미니 그래프(전압/전류/전력량)"""
     def __init__(self, host_widget, csv_path):
@@ -30,11 +32,10 @@ class DashboardGraphManager:
         col_pw = "전력량(W)"
 
         self.graph.ax.clear()
-        self.graph.ax.plot(res["timestamp"], res[col_v],  label="전압(V)",  color="#930B0D")
-        self.graph.ax.plot(res["timestamp"], res[col_a],  label="전류(A)",  color="#0C6AA4")
-        self.graph.ax.plot(res["timestamp"], res[col_pw], label="전력량(W)", color="#4C934C")
+        self.graph.ax.plot(res["timestamp"], res[col_v], color="#930B0D")
+        self.graph.ax.plot(res["timestamp"], res[col_a], color="#0C6AA4")
+        self.graph.ax.plot(res["timestamp"], res[col_pw],color="#4C934C")
         self.graph.ax.set_ylim(bottom=0)
         self.graph.ax.tick_params(axis="x", labelrotation=30)
         self.graph.ax.grid(True, linestyle="--", alpha=0.3)
-        self.graph.ax.legend(fontsize=8, loc="upper right")
         self.graph.draw()

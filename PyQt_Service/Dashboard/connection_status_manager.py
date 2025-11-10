@@ -9,4 +9,4 @@ class ConnectionStatusManager:
             return
         status = "정상" if self.connected else "끊김"
         color = "#0014a9" if self.connected else "#a90000"
-        self.label.setText(f"<b>연결 상태:</b> <span style='color:{color}'>{status}</span>")
+        self.label.setText(f"<b style='font-size:14pt;'>연결 상태: </b> <span style='color:{color}; font-size:14pt;' >{status}</span>")

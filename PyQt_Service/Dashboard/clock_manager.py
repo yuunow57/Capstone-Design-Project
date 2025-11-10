@@ -9,4 +9,4 @@ class ClockManager:
         if not self.label:
             return
         now = QTime.currentTime().toString("hh:mm:ss")
-        self.label.setText(f"<span style='font-size:14pt; color:#00ac00;'>{now}</span>")
+        self.label.setText(f"<b style='font-size:14pt;'>현재 시각: </b><span style='font-size:14pt; color:#00ac00;'>{now}</span>")

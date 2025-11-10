@@ -19,4 +19,5 @@ class BatteryStatusManager:
 
         s1, s2, s3 = map(calc_soc, [v1, v2, v3])
         text = f"1S: {s1:.1f}% / 2S: {s2:.1f}% / 3S: {s3:.1f}%"
-        self.label.setText(f"<b>배터리 잔량</b>: {text}")
+        self.label.setText( f"<b style='font-size:14pt;'>배터리 잔량:</b> "
+    f"<span style='font-size:14pt;'>{text}</span>")
