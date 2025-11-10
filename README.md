@@ -2,7 +2,7 @@
 
 ## 의존성 설치
 ```
-pip install PyQt5 numpy pyqtgraph pandas matplotlib pyserial
+pip install PyQt5 pandas matplotlib pyserial
 ```
 
 
