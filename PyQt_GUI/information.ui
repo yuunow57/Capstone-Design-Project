@@ -112,7 +112,34 @@ border-radius:10px;</string>
       <string notr="true">background: #ffffff;</string>
      </property>
      <property name="text">
-      <string>프로그램 정보</string>
+      <string>프로그램 개요</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>451</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;</string>
+     </property>
+     <property name="text">
+      <string>“본 프로그램은 아두이노 기반의 신재생에너지(태양광) 발전 데이터를 수집하고, PyQt GUI를 통해 시각적으로 표시하는 관제용 프로그램입니다.”</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -159,6 +186,33 @@ border-radius:10px;</string>
       <string>개발 환경</string>
      </property>
     </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>291</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;</string>
+     </property>
+     <property name="text">
+      <string>Arduino, Python 3.8, PyQt5, Matplotlib</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
    <widget class="QFrame" name="frame_4">
     <property name="geometry">
@@ -201,6 +255,33 @@ border-radius:10px;</string>
      </property>
      <property name="text">
       <string>T E A M</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>70</y>
+       <width>451</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>28</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;</string>
+     </property>
+     <property name="text">
+      <string>404</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -247,6 +328,33 @@ border-radius:10px;</string>
       <string>프로그램 버전</string>
      </property>
     </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>291</width>
+       <height>121</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;</string>
+     </property>
+     <property name="text">
+      <string>V 1.0.0</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
    <widget class="QFrame" name="frame_6">
     <property name="geometry">
@@ -289,6 +397,33 @@ border-radius:10px;</string>
      </property>
      <property name="text">
       <string>연락처</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>291</width>
+       <height>131</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;</string>
+     </property>
+     <property name="text">
+      <string>kit.naver.com</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
