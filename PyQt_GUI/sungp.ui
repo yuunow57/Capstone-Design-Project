@@ -235,6 +235,49 @@
       </property>
      </widget>
     </widget>
+    <widget class="QPushButton" name="btn_show_csv">
+     <property name="geometry">
+      <rect>
+       <x>1070</x>
+       <y>260</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_interval">
+     <property name="geometry">
+      <rect>
+       <x>1070</x>
+       <y>200</y>
+       <width>76</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>1분</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>10분</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>1시간</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>24시간</string>
+      </property>
+     </item>
+    </widget>
    </widget>
   </widget>
  </widget>

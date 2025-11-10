@@ -240,6 +240,49 @@
     </widget>
    </widget>
   </widget>
+  <widget class="QComboBox" name="comboBox_interval">
+   <property name="geometry">
+    <rect>
+     <x>1070</x>
+     <y>140</y>
+     <width>111</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>1분</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>10분</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1시간</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>24시간</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="btn_show_csv">
+   <property name="geometry">
+    <rect>
+     <x>1070</x>
+     <y>270</y>
+     <width>111</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PushButton</string>
+   </property>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
