@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>inforpage</class>
+ <widget class="QWidget" name="inforpage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1171</width>
+    <height>816</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color : #F9FAFB;</string>
+  </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>-50</x>
+     <y>10</y>
+     <width>1174</width>
+     <height>801</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">  background-color : #F9FAFB;
+   color: #1d232f;
+   border-radius: 8px;
+   font-family: &quot;Noto Sans KR&quot;;
+   font-weight: 700;          /* Bold 고정 */</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QWidget" name="verticalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1161</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>Noto Sans KR</family>
+         <pointsize>18</pointsize>
+         <weight>87</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color : #F9FAFB;</string>
+       </property>
+       <property name="text">
+        <string>로 그</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>90</y>
+      <width>1011</width>
+      <height>621</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border:1px solid black;
+border-radius:10px;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QTextEdit" name="textEdit">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>1011</width>
+       <height>621</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>730</y>
+      <width>321</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Noto Sans KR</family>
+      <pointsize>12</pointsize>
+      <weight>87</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+    </property>
+    <property name="text">
+     <string>💾로그 저장</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>730</y>
+      <width>321</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Noto Sans KR</family>
+      <pointsize>12</pointsize>
+      <weight>87</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+    </property>
+    <property name="text">
+     <string>🗑️로그 지우기</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

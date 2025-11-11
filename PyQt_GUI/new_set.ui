@@ -1,0 +1,1297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1112</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QFrame" name="frame_main">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>10</y>
+     <width>1071</width>
+     <height>771</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color : #F9FAFB;
+   color: #1d232f;
+   border-radius: 8px;
+   font-family: &quot;Noto Sans KR&quot;;
+   font-weight: 700;    
+   text-align: center;      
+ </string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Box</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>1031</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 1px solid#333333; </string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border :none;
+    color: #1d232f;
+</string>
+     </property>
+     <property name="text">
+      <string>USB 포트 선택 </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="port_combo">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>80</y>
+       <width>391</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QComboBox {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+    padding: 6px 30px 6px 10px;
+   font-family: &quot;Noto Sans KR&quot;;
+   font-weight: 700;       
+}
+QComboBox:hover {
+    border-color: #bfc8d8;
+}
+QComboBox:focus {
+    border: 1px solid #4b8cff;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 24px;
+    border-left: 1px solid #d7dde8;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background: #f7f9fc;
+}
+</string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>COM3</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>COM4</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Auto</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>130</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border :none;</string>
+     </property>
+     <property name="text">
+      <string>파일럿 램프 제어</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_pilot_red">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>140</y>
+       <width>120</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>🟢 Green</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>20</y>
+       <width>221</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>15</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>설 정</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_refresh_port">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>80</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>새로고침</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="connect_button">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>80</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>연 결</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_connect_status">
+     <property name="geometry">
+      <rect>
+       <x>870</x>
+       <y>80</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"> background: #ffffff;
+    color: #930B0D;;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;</string>
+     </property>
+     <property name="text">
+      <string>연결 X</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_pilot_green">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>140</y>
+       <width>120</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>🔴Red</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_pilot_off">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>140</y>
+       <width>120</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>⚫OFF</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>190</y>
+       <width>161</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border :none;</string>
+     </property>
+     <property name="text">
+      <string>할로겐 램프 제어</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>140</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border :none;</string>
+     </property>
+     <property name="text">
+      <string>데이터 관리</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>140</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>📁데이터 저장</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_halogen_on">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>190</y>
+       <width>391</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>💡ON</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_halogen_off">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>190</y>
+       <width>371</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>⚫OFF</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>890</x>
+       <y>60</y>
+       <width>71</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;</string>
+     </property>
+     <property name="text">
+      <string>상태 표시</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>280</y>
+      <width>511</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Noto Sans KR</family>
+      <weight>87</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 1px solid#333333;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>130</y>
+       <width>141</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border :none;</string>
+     </property>
+     <property name="text">
+      <string>이차전지 선풍기 </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>141</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border :none;</string>
+     </property>
+     <property name="text">
+      <string>상용전원  선풍기</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>10</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>15</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>🌪️ 선풍기 제어</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="chk_fan_commercial_on">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>70</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>🟢 ON</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="chk_fan_commercial_off">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>70</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>⚫OFF</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="chk_fan_battery_on">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>130</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>🟢 ON</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="chk_fan_battery_off">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>130</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>⚫OFF</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame_3">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>280</y>
+      <width>511</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 1px solid#333333;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>10</y>
+       <width>211</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>15</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>🖥 모니터링 명령어</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_battery_voltage">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>70</y>
+       <width>141</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>배터리 전압</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_vcmon_data">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>70</y>
+       <width>141</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>VC_MON 데이터</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_system_status">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>130</y>
+       <width>141</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>시스템 상태</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_button_state">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>130</y>
+       <width>141</width>
+       <height>45</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>버튼 상태</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="frame_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>490</y>
+      <width>1031</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Noto Sans KR</family>
+      <weight>87</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 1px solid#333333;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>10</y>
+       <width>431</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>15</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>VC_MON_LC 제어</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_auto_send_start">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>90</y>
+       <width>311</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>⏩️️자동 송신 시작</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_auto_send_stop">
+     <property name="geometry">
+      <rect>
+       <x>700</x>
+       <y>90</y>
+       <width>311</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>⏹️자동 송신 정지</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_data_reset">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>90</y>
+       <width>311</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans KR</family>
+       <pointsize>12</pointsize>
+       <weight>87</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background: #ffffff;
+    color: #1d232f;
+    border: 1px solid #d7dde8;
+    border-radius: 8px;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
+     </property>
+     <property name="text">
+      <string>🔄데이터 리셋</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

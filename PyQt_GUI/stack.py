@@ -1,9 +1,7 @@
 from PyQt5 import QtWidgets, uic
 import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from PyQt_Service.Setting import SettingController
-from PyQt_Service.Monitoring import MonitoringController
-from PyQt_Service.Dashboard import DashboardController
+
 
 class StackApp(QtWidgets.QMainWindow):
     def __init__(self):
@@ -18,20 +16,10 @@ class StackApp(QtWidgets.QMainWindow):
         # 기존 페이지들
         dashboard_page = self.stack.widget(0)
         page_sungp = uic.loadUi(os.path.join(base_path, "sungp.ui"))
-        page_battery = uic.loadUi(os.path.join(base_path, "battery.ui"))
-        page_setting = uic.loadUi(os.path.join(base_path, "setting.ui"))
+        page_battery = uic.loadUi(os.path.join(base_path, "log.ui"))
+        page_setting = uic.loadUi(os.path.join(base_path, "new_set.ui"))
         page_info = uic.loadUi(os.path.join(base_path, "information.ui"))
 
-        sungp_csv   = os.path.join(base_path, "../PyQt_Service/Monitoring/sample/solar_data.csv")
-        battery_csv = os.path.join(base_path, "../PyQt_Service/Monitoring/sample/battery_data.csv")
-
-        # 컨트롤러 연결부
-        self.setting_controller = SettingController(page_setting)
-        
-        self.sungp_controller   = MonitoringController(page_sungp, sungp_csv)
-        self.battery_controller = MonitoringController(page_battery, battery_csv)
-
-        self.dashboard_controller = DashboardController(dashboard_page, sungp_csv)
 
         # stackedWidget에 추가
         self.stack.addWidget(page_sungp)
@@ -59,17 +47,6 @@ class StackApp(QtWidgets.QMainWindow):
 
     #
 
-    def update_interval(self, value):
-        print(f"그래프 업데이트 주기 변경: {value}")
-        self.batteryGraph.set_update_interval(value)
-
-    def on_interval_changed(self, page_setting):
-        text = page_setting.comboBox.currentText()
-        print(f"Update interval set to: {text}")
-
-    def on_port_changed(self, page_setting):
-        port = page_setting.comboBox_2.currentText()
-        print(f"Serial port set to: {port}")
 
 
     def change_page(self, page):

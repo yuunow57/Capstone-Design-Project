@@ -86,7 +86,7 @@ color: #333333;
 border-radius: 8px;</string>
         </property>
         <property name="text">
-         <string> 대시보드</string>
+         <string>  대시보드</string>
         </property>
        </widget>
       </item>
@@ -112,7 +112,7 @@ color: #333333;;
 border-radius: 8px;</string>
         </property>
         <property name="text">
-         <string> 태양광발전 현황 M</string>
+         <string>  태양광발전 현황 M</string>
         </property>
         <property name="iconSize">
          <size>
@@ -143,7 +143,7 @@ border-radius: 8px;</string>
 text-align: left; </string>
         </property>
         <property name="text">
-         <string> 이차전지 모듈 상태 M</string>
+         <string>  로그</string>
         </property>
        </widget>
       </item>
@@ -169,7 +169,7 @@ border-radius: 8px;
 text-align: left; </string>
         </property>
         <property name="text">
-         <string> 설정</string>
+         <string>  설정</string>
         </property>
        </widget>
       </item>
@@ -198,7 +198,7 @@ border-radius: 8px;
 text-align: left; </string>
         </property>
         <property name="text">
-         <string>  정보</string>
+         <string>   정보</string>
         </property>
        </widget>
       </item>
@@ -308,10 +308,10 @@ text-align: left;
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="battery_status_label">
        <property name="geometry">
         <rect>
-         <x>90</x>
+         <x>70</x>
          <y>150</y>
          <width>411</width>
          <height>51</height>
@@ -326,13 +326,16 @@ text-align: left;
         </font>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;배터리 잔량&lt;/span&gt;: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;이차전지 모듈 상태: &lt;/span&gt;&lt;span style=&quot; font-size:14pt; color:#00ac00;&quot;&gt;2.24V&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
       <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
-         <x>610</x>
+         <x>540</x>
          <y>150</y>
          <width>361</width>
          <height>51</height>
@@ -347,13 +350,16 @@ text-align: left;
         </font>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;현재 시각&lt;/span&gt;: &lt;span style=&quot; font-size:12pt; color:#00ac00;&quot;&gt;20:32:10&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;현재 시각&lt;/span&gt;: &lt;span style=&quot; font-size:14pt; color:#00ac00;&quot;&gt;20:32:10&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="solar_power_label">
        <property name="geometry">
         <rect>
-         <x>90</x>
+         <x>70</x>
          <y>240</y>
          <width>411</width>
          <height>51</height>
@@ -368,13 +374,16 @@ text-align: left;
         </font>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;부하전력:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;태양광 발전 데이터:&lt;/span&gt;&lt;span style=&quot; font-size:14pt; color:#930b0d;&quot;&gt;13.4W&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
       <widget class="QLabel" name="label_5">
        <property name="geometry">
         <rect>
-         <x>610</x>
+         <x>520</x>
          <y>230</y>
          <width>361</width>
          <height>51</height>
@@ -389,7 +398,10 @@ text-align: left;
         </font>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;연결 상태: &lt;/span&gt;&lt;span style=&quot; font-size:14pt; color:#0014a9;&quot;&gt; 정상/끊김&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;연결 상태: &lt;/span&gt;&lt;span style=&quot; font-size:14pt; color:#0014a9;&quot;&gt;정상&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
       <widget class="QFrame" name="frame_3">
@@ -425,7 +437,7 @@ text-align: left;
          </font>
         </property>
         <property name="text">
-         <string>발전 전력</string>
+         <string>Total</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -445,154 +457,62 @@ text-align: left;
 border-radius:10px;</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_8">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>390</y>
-          <width>16</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: #930B0D;
-border-radius: 8px;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_12">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>390</y>
-          <width>56</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Agency FB</family>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>전압(V)</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_9">
-        <property name="geometry">
-         <rect>
-          <x>150</x>
-          <y>390</y>
-          <width>16</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: #0C6AA4;
-border-radius: 8px;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_13">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>390</y>
-          <width>56</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Agency FB</family>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>전류(A)</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_10">
-        <property name="geometry">
-         <rect>
-          <x>220</x>
-          <y>390</y>
-          <width>16</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: #4C934C;
-border-radius: 8px;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_14">
-        <property name="geometry">
-         <rect>
-          <x>240</x>
-          <y>390</y>
-          <width>56</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>Agency FB</family>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>최대전류</string>
-        </property>
-       </widget>
-       <widget class="QWidget" name="verticalLayoutWidget_3">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>410</y>
-          <width>341</width>
-          <height>61</height>
-         </rect>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_3"/>
-       </widget>
       </widget>
       <widget class="QLabel" name="label_6">
        <property name="geometry">
         <rect>
-         <x>580</x>
-         <y>490</y>
-         <width>361</width>
-         <height>61</height>
+         <x>550</x>
+         <y>370</y>
+         <width>331</width>
+         <height>321</height>
         </rect>
        </property>
        <property name="font">
         <font>
          <family>Noto Sans KR</family>
-         <pointsize>10</pointsize>
+         <pointsize>12</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">border:1px solid black;
+border-radius:10px;
+padding-top: 10px;</string>
+       </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;경고 메시지: &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; color:#ce9178;&quot;&gt;🚦&lt;/span&gt;파일럿 램프 :&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#ce9178;&quot;&gt;🌪️&lt;/span&gt;상용정원 :&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#ce9178;&quot;&gt;🔋&lt;/span&gt;이차전지 :&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Consolas','Courier New','monospace'; font-size:14px; font-weight:400; color:#ce9178;&quot;&gt;💡&lt;/span&gt;할로겐 램프 :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_17">
+       <property name="geometry">
+        <rect>
+         <x>550</x>
+         <y>330</y>
+         <width>331</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Noto Sans KR</family>
+         <pointsize>9</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+border-radius:10px;</string>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;시스템 상태&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </widget>
