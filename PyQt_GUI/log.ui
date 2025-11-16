@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>inforpage</class>
- <widget class="QWidget" name="inforpage">
+ <class>log</class>
+ <widget class="QWidget" name="log">
   <property name="geometry">
    <rect>
     <x>0</x>

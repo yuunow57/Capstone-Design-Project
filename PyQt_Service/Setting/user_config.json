@@ -1,5 +1,0 @@
-{
-    "usb_port": "COM1",
-    "charge_limit": "100",
-    "threshold_voltage": "4.6"
-}

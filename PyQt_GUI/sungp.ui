@@ -53,7 +53,7 @@
        <height>361</height>
       </rect>
      </property>
-     <widget class="PlotWidget" name="frame_3">
+     <widget class="QFrame" name="frame_3">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -106,7 +106,7 @@
        <height>361</height>
       </rect>
      </property>
-     <widget class="PlotWidget" name="frame">
+     <widget class="QFrame" name="frame">
       <property name="geometry">
        <rect>
         <x>8</x>
@@ -162,7 +162,7 @@
        <height>331</height>
       </rect>
      </property>
-     <widget class="PlotWidget" name="frame_2">
+     <widget class="QFrame" name="frame_2">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -218,7 +218,7 @@
        <height>321</height>
       </rect>
      </property>
-     <widget class="PlotWidget" name="frame_4">
+     <widget class="QFrame" name="frame_4">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -346,7 +346,7 @@ QComboBox::drop-down {
  </widget>
  <customwidgets>
   <customwidget>
-   <class>PlotWidget</class>
+   <class>QFrame</class>
    <extends>QFrame</extends>
    <header>pyqtgraph</header>
    <container>1</container>
