@@ -50,5 +50,10 @@ pip install PyQt5 pandas matplotlib pyserial pyqtgraph mysql-connector-python
         └─ 📜 config_apply_manager.py      # 설정값 저장 및 적용(옵션)
 ```
 
+## 수정 및 보완 필요 ##
+1. 대시보드의 시스템 상태 부분 각각 레이블로 분리  
 
+2. 설정 페이지의 버튼 상태 버튼 필요 유무 재고  
+
+3. 토탈 전압그래프의 데이터를 아두이노 요청코드가 맞는지 확인 및 수정  
 
