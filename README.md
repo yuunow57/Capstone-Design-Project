@@ -21,7 +21,7 @@ pip install PyQt5 pandas matplotlib pyserial pyqtgraph mysql-connector-python
 │
 └─ 📂 PyQt_Service                      # 각 기능 로직을 모듈화한 서비스 계층
     │
-    ├─ 📂 Dashboard                       # 대시보드 기능 로직
+    ├─ 📂 Dashboard                     # 대시보드 기능 로직
     │   ├─ 📜 dashboard_controller.py      # 대시보드 UI 업데이트·이벤트 제어
     │   └─ 📜 dashboard_service.py         # 배터리·태양광 데이터 가공 서비스
     │
