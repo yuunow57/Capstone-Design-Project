@@ -8,3 +8,7 @@ CREATE TABLE measurement (
     solar_p DECIMAL(7,2) NULL,         -- 전력(W) = V * I
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+TRUNCATE TABLE measurement;
+
+DROP TABLE measurement;
