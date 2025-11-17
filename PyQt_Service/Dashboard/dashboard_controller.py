@@ -1,5 +1,3 @@
-# PyQt_Service/Dashboard/dashboard_controller.py
-
 import threading
 import time
 from datetime import datetime
@@ -12,35 +10,33 @@ from PyQt_Service.Monitoring.monitoring_repository import MonitoringRepository
 from PyQt_Service.Log.log_service import LogService
 from PyQt_Service.Log.log_manager import LogManager
 
-class DashboardController(QtCore.QObject):
-    """
-    대시보드 페이지 컨트롤러
 
-    - 이차전지 모듈 Total 전압: 1분 주기 측정, 30개 버퍼 (약 30분)
-    - 현재 시각: 1초마다 갱신
-    - 태양광 발전 데이터(solar_p): measurement 테이블 마지막 행의 solar_p
-    - 연결 상태: SerialManager.is_connected
-    """
+class DashboardController(QtCore.QObject):
 
     def __init__(self, ui, serial_manager, system_state):
         super().__init__()
 
         self.ui = ui
-        self.serial = serial_manager        # SettingController.serial (SerialManager)
-        self.system_state = system_state    # 현재 안 쓰지만 구조 유지
+        self.serial = serial_manager
+        self.system_state = system_state
 
         self.log = LogService()
-
         self.repo = MonitoringRepository()
 
         # ─────────────────────────────────────────────
-        # 📌 UI 위젯 참조
+        # 📌 UI Label 참조
         # ─────────────────────────────────────────────
         self.label_time   = self.ui.findChild(QtWidgets.QLabel, "label_3")
         self.label_batt   = self.ui.findChild(QtWidgets.QLabel, "battery_status_label")
         self.label_solar  = self.ui.findChild(QtWidgets.QLabel, "solar_power_label")
         self.label_status = self.ui.findChild(QtWidgets.QLabel, "label_5")
         self.graph_widget = self.ui.findChild(QtWidgets.QWidget, "widget_graph_area")
+
+        # ⭐ 추가됨: 시스템 상태 UI 라벨 4개
+        self.label_pilot  = self.ui.findChild(QtWidgets.QLabel, "label_8")
+        self.label_commercial_fan = self.ui.findChild(QtWidgets.QLabel, "label_9")
+        self.label_battery_fan = self.ui.findChild(QtWidgets.QLabel, "label_10")
+        self.label_halogen = self.ui.findChild(QtWidgets.QLabel, "label_11")
 
         # ─────────────────────────────────────────────
         # 📌 Matplotlib 그래프 설정
@@ -52,24 +48,23 @@ class DashboardController(QtCore.QObject):
         layout.setContentsMargins(0, 0, 0, 0)
         layout.addWidget(self.canvas)
 
-        # 버퍼: 1분 간격 측정 30개 → 약 30분
+        # 30분 버퍼
         self.time_buffer = []
         self.voltage_buffer = []
         self.buffer_limit = 30
 
         # ─────────────────────────────────────────────
-        # 📌 1초마다 UI 업데이트
+        # 📌 1초 UI 업데이트 타이머
         # ─────────────────────────────────────────────
         self.timer_ui = QtCore.QTimer()
         self.timer_ui.timeout.connect(self.update_ui)
-        self.timer_ui.start(1000)  # 1초
+        self.timer_ui.start(1000)
 
         # ─────────────────────────────────────────────
-        # 📌 1분마다 총전압 읽기 스레드 시작
+        # 📌 1분 간격 총전압 수집 스레드
         # ─────────────────────────────────────────────
         self.thread = threading.Thread(target=self.collect_voltage, daemon=True)
         self.thread.start()
-        
 
     # ===============================================================
     # 1분마다 총전압 읽기 ($re)
@@ -83,10 +78,8 @@ class DashboardController(QtCore.QObject):
                 self.time_buffer.append(now)
                 self.voltage_buffer.append(voltage)
             else:
-                # 실패 시 그래프에 공백을 넣지 않음
                 LogManager.instance().log("⚠️ 총전압 갱신 실패 (None)")
 
-            # 버퍼 유지
             if len(self.voltage_buffer) > self.buffer_limit:
                 self.time_buffer.pop(0)
                 self.voltage_buffer.pop(0)
@@ -95,36 +88,24 @@ class DashboardController(QtCore.QObject):
             time.sleep(60)
 
     # ===============================================================
-    # 총전압 읽기 ($re 명령)
+    # '$re' → 총전압 읽기
     # ===============================================================
     def read_total_voltage(self) -> float:
-        """
-        아두이노 '$re' 명령 응답:
-        예) "A3 (Total) - ADC: 1234 | Voltage: 13.456V"
-        여기서 Voltage 뒤 숫자만 파싱해 float로 반환
-        """
         try:
             if self.serial.is_connected and self.serial.port:
-
-                # 1) 명령 전송
                 self.serial.port.write(b"$re\n")
                 time.sleep(0.1)
 
-                # 2) 응답 한 줄 읽기
                 line = self.serial.port.readline().decode(errors="ignore").strip()
 
                 if not line:
                     self.log.add("⚠️ 총전압 응답 없음")
                     return None
 
-                # 3) "Voltage:" 포함된 부분만 찾기
                 if "Voltage" not in line:
                     self.log.add(f"⚠️ 예상치 못한 응답: {line}")
                     return None
 
-                # 4) 숫자만 추출
-                # ex) "A3 (Total) - ADC: 1234 | Voltage: 13.456V"
-                # → "13.456"
                 import re
                 match = re.search(r"Voltage:\s*([0-9\.]+)", line)
                 if match:
@@ -133,29 +114,22 @@ class DashboardController(QtCore.QObject):
                     return voltage
 
                 self.log.add(f"⚠️ 전압 파싱 실패: {line}")
-                return None
-
         except Exception as e:
-            self.log.add(f"⚠️ read_total_voltage() 오류: {e}")
+            self.log.add(f"⚠️ read_total_voltage 오류: {e}")
 
         return None
 
     # ===============================================================
-    # 태양광발전 최신값(solar_p) 가져오기
+    # measurement 테이블에서 solar_p 최신 값 가져오기
     # ===============================================================
     def get_latest_solar_power(self) -> float:
-        """
-        measurement 테이블에서 가장 마지막 행의 solar_p 값 반환
-        """
         row = self.repo.get_latest_measurement()
         if row is None:
             return 0.0
 
         try:
             return float(row["solar_p"])
-            
-        except Exception as e:
-            print("⚠️ get_latest_solar_power() 변환 오류:", e)
+        except:
             return 0.0
 
     # ===============================================================
@@ -172,18 +146,46 @@ class DashboardController(QtCore.QObject):
         ax.grid(True)
         ax.tick_params(axis="y", labelsize=7)
         ax.tick_params(axis="x", labelsize=7)
-        
 
         self.canvas.draw_idle()
 
     # ===============================================================
-    # UI 업데이트 (매 1초)
+    # ⭐ 아두이노 장치 상태 요청 ($state)
+    # ===============================================================
+    def get_device_states(self):
+        """
+        아두이노 → '$state' 명령  
+        응답 예시:
+            STATE: PL=1, CF=0, BF=1, HL=0
+        """
+        if not (self.serial.is_connected and self.serial.port):
+            return None
+
+        try:
+            self.serial.port.write(b"$state\n")
+            time.sleep(0.1)
+
+            line = self.serial.port.readline().decode(errors="ignore").strip()
+            if not line:
+                return None
+
+            import re
+            m = re.findall(r"(PL|CF|BF|HL)=([01])", line)
+
+            if not m:
+                return None
+
+            return {key: int(val) for key, val in m}
+
+        except:
+            return None
+
+    # ===============================================================
+    # UI 업데이트 (1초)
     # ===============================================================
     def update_ui(self):
 
-        # ===============================================================
-        # 1) 현재 시각
-        # ===============================================================
+        # (1) 현재 시각
         now = datetime.now().strftime("%H:%M:%S")
         if self.label_time:
             self.label_time.setText(
@@ -193,13 +195,12 @@ class DashboardController(QtCore.QObject):
                 f"</p></body></html>"
             )
 
-        # ===============================================================
-        # 2) 이차전지 모듈 상태
-        # ===============================================================
+        # (2) 이차전지 모듈 상태 (그래프용 전압)
         if self.voltage_buffer:
             latest_voltage = self.voltage_buffer[-1]
             batt_text = f"{latest_voltage:.2f} V"
         else:
+            latest_voltage = 0.0
             batt_text = "---- V"
 
         if self.label_batt:
@@ -210,26 +211,17 @@ class DashboardController(QtCore.QObject):
                 f"</p></body></html>"
             )
 
-        # ===============================================================
-        # 3) 태양광 발전 데이터
-        # ===============================================================
-        try:
-            solar_p = self.get_latest_solar_power()
-            solar_text = f"{solar_p:.2f} W"
-        except:
-            solar_text = "0.00 W"
-
+        # (3) 태양광 발전 데이터 (DB에서)
+        solar_p = self.get_latest_solar_power()
         if self.label_solar:
             self.label_solar.setText(
                 f"<html><body><p>"
                 f"<span style='font-size:14pt;'>태양광 발전 데이터 : </span>"
-                f"<span style='font-size:14pt; color:#930b0d;'>{solar_text}</span>"
+                f"<span style='font-size:14pt; color:#930b0d;'>{solar_p:.2f} W</span>"
                 f"</p></body></html>"
             )
 
-        # ===============================================================
-        # 4) 연결 상태
-        # ===============================================================
+        # (4) 연결 상태
         if self.serial.is_connected:
             status_color = "#0014a9"
             status_text = "정상"
@@ -242,5 +234,69 @@ class DashboardController(QtCore.QObject):
                 f"<html><body><p>"
                 f"<span style='font-size:14pt;'>연결 상태 : </span>"
                 f"<span style='font-size:14pt; color:{status_color};'>{status_text}</span>"
+                f"</p></body></html>"
+            )
+
+        # ===============================================================
+        # ⭐ (5) 시스템 상태 4개 표시 (기본 텍스트 유지하고 오른쪽에만 상태 표시)
+        # ===============================================================
+
+        # ─────────────────────────────────────────────
+        # 파일럿 램프 — 전압으로 자동 판단
+        # ─────────────────────────────────────────────
+        if hasattr(self, "label_pilot"):
+            pilot_on = latest_voltage >= 10.0
+            color = "#00ac00" if pilot_on else "#930b0d"
+            state = "ON" if pilot_on else "OFF"
+
+            self.label_pilot.setText(
+                f"<html><body><p align='center'>"
+                f"<span style='font-size:14pt;'>🚦 파일럿 램프 : </span>"
+                f"<span style='font-size:14pt; color:{color};'>{state}</span>"
+                f"</p></body></html>"
+            )
+
+        # ─────────────────────────────────────────────
+        # 상용 선풍기
+        # ─────────────────────────────────────────────
+        if hasattr(self, "label_commercial_fan"):
+            on = self.system_state.get("fan_commercial", False)
+            color = "#00ac00" if on else "#930b0d"
+            text = "ON" if on else "OFF"
+
+            self.label_commercial_fan.setText(
+                f"<html><body><p align='center'>"
+                f"<span style='font-size:14pt;'>🌪️ 상용 선풍기 : </span>"
+                f"<span style='font-size:14pt; color:{color};'>{text}</span>"
+                f"</p></body></html>"
+            )
+
+        # ─────────────────────────────────────────────
+        # 배터리 선풍기
+        # ─────────────────────────────────────────────
+        if hasattr(self, "label_battery_fan"):
+            on = self.system_state.get("fan_battery", False)
+            color = "#00ac00" if on else "#930b0d"
+            text = "ON" if on else "OFF"
+
+            self.label_battery_fan.setText(
+                f"<html><body><p align='center'>"
+                f"<span style='font-size:14pt;'>🔋 배터리 선풍기 : </span>"
+                f"<span style='font-size:14pt; color:{color};'>{text}</span>"
+                f"</p></body></html>"
+            )
+
+        # ─────────────────────────────────────────────
+        # 할로겐 램프
+        # ─────────────────────────────────────────────
+        if hasattr(self, "label_halogen"):
+            on = self.system_state.get("halogen", False)
+            color = "#00ac00" if on else "#930b0d"
+            text = "ON" if on else "OFF"
+
+            self.label_halogen.setText(
+                f"<html><body><p align='center'>"
+                f"<span style='font-size:14pt;'>💡 할로겐 램프 : </span>"
+                f"<span style='font-size:14pt; color:{color};'>{text}</span>"
                 f"</p></body></html>"
             )
