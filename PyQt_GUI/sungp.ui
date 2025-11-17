@@ -268,8 +268,8 @@
      <rect>
       <x>230</x>
       <y>30</y>
-      <width>271</width>
-      <height>31</height>
+      <width>270</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -325,18 +325,33 @@ QComboBox::drop-down {
      <rect>
       <x>570</x>
       <y>30</y>
-      <width>221</width>
-      <height>31</height>
+      <width>270</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true"> background: #ffffff;
+     <string notr="true">    
+QPushButton {
+    background: #ffffff;
     color: #1d232f;
     border: 1px solid #d7dde8;
     border-radius: 8px;
   font-family: &quot;Noto Sans KR&quot;;
    font-weight: 700;    
-   text-align: center;      </string>
+   text-align: center;  ;
+}
+
+/* 마우스 올렸을 때 */
+QPushButton:hover {
+    background: #f5f6fa;
+}
+
+/* 클릭했을 때 (눌린 상태) */
+QPushButton:pressed {
+    background: #e1e5ee;
+    color: #0f1117;
+    border: 1px solid #b8bfd0;
+}</string>
     </property>
     <property name="text">
      <string>CSV</string>
@@ -344,14 +359,6 @@ QComboBox::drop-down {
    </widget>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QFrame</class>
-   <extends>QFrame</extends>
-   <header>pyqtgraph</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
