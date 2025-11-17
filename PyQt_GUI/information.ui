@@ -138,7 +138,7 @@ border-radius:10px;</string>
       <string notr="true">border: none;</string>
      </property>
      <property name="text">
-      <string>“본 프로그램은 아두이노 기반의 신재생에너지(태양광) 발전 데이터를 수집하고, PyQt GUI를 통해 시각적으로 표시하는 관제용 프로그램입니다.”</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;“본 프로그램은 아두이노 기반의 신재생에너지(태양광) 발전 데이터를 수집하고, PyQt GUI를 통해 &lt;span style=&quot; color:#ff3108;&quot;&gt;시각적으로 표시하는 관제용 프로그램&lt;/span&gt;입니다.”&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -292,7 +292,7 @@ border-radius:10px;</string>
       <string notr="true">border: none;  </string>
      </property>
      <property name="text">
-      <string>404</string>
+      <string>세미콜론</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -322,7 +322,7 @@ border-radius:10px;</string>
       <string notr="true">border: none;</string>
      </property>
      <property name="text">
-      <string>팀장 : 장윤호      팀원: 이강욱, 김혜정, 신성준, 김욱진, 이현석</string>
+      <string>팀장 : 정하은     팀원: 장윤호, 이강욱, 황종훈, 한승윤</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -390,7 +390,7 @@ border-radius:10px;</string>
      <property name="font">
       <font>
        <family>Noto Sans KR</family>
-       <pointsize>12</pointsize>
+       <pointsize>16</pointsize>
        <weight>87</weight>
        <bold>true</bold>
       </font>

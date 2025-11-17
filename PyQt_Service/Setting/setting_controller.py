@@ -43,7 +43,6 @@ class SettingController:
         self.ui.btn_battery_voltage.clicked.connect(self.command.print_battery_voltage)
         self.ui.btn_vcmon_data.clicked.connect(self.command.print_vcmon_data)
         self.ui.btn_system_status.clicked.connect(self.command.print_system_status)
-        self.ui.btn_button_state.clicked.connect(self.command.print_all_voltages)
 
         # VC_MON_LC 제어
         self.ui.btn_data_reset.clicked.connect(self.command.reset_vcmon_data)

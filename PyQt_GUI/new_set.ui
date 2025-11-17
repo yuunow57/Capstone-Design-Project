@@ -463,74 +463,6 @@ QPushButton:pressed {
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="label_7">
-     <property name="geometry">
-      <rect>
-       <x>610</x>
-       <y>140</y>
-       <width>131</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Noto Sans KR</family>
-       <pointsize>12</pointsize>
-       <weight>87</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border :none;</string>
-     </property>
-     <property name="text">
-      <string>데이터 관리</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_5">
-     <property name="geometry">
-      <rect>
-       <x>750</x>
-       <y>140</y>
-       <width>231</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Noto Sans KR</family>
-       <pointsize>12</pointsize>
-       <weight>87</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {
-    background: #ffffff;
-    color: #1d232f;
-    border: 1px solid #d7dde8;
-    border-radius: 8px;
-}
-
-/* 마우스 올렸을 때 */
-QPushButton:hover {
-    background: #f5f6fa;
-}
-
-/* 클릭했을 때 (눌린 상태) */
-QPushButton:pressed {
-    background: #e1e5ee;
-    color: #0f1117;
-    border: 1px solid #b8bfd0;
-}</string>
-     </property>
-     <property name="text">
-      <string>📁데이터 저장</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="btn_halogen_on">
      <property name="geometry">
       <rect>
@@ -952,8 +884,8 @@ QPushButton:pressed {
     <widget class="QPushButton" name="btn_battery_voltage">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>70</y>
+       <x>180</x>
+       <y>92</y>
        <width>141</width>
        <height>45</height>
       </rect>
@@ -993,8 +925,8 @@ QPushButton:pressed {
     <widget class="QPushButton" name="btn_vcmon_data">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>70</y>
+       <x>340</x>
+       <y>92</y>
        <width>141</width>
        <height>45</height>
       </rect>
@@ -1034,8 +966,8 @@ QPushButton:pressed {
     <widget class="QPushButton" name="btn_system_status">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>130</y>
+       <x>20</x>
+       <y>92</y>
        <width>141</width>
        <height>45</height>
       </rect>
@@ -1072,47 +1004,6 @@ QPushButton:pressed {
       <string>시스템 상태</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="btn_button_state">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>130</y>
-       <width>141</width>
-       <height>45</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Noto Sans KR</family>
-       <pointsize>12</pointsize>
-       <weight>87</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {
-    background: #ffffff;
-    color: #1d232f;
-    border: 1px solid #d7dde8;
-    border-radius: 8px;
-}
-
-/* 마우스 올렸을 때 */
-QPushButton:hover {
-    background: #f5f6fa;
-}
-
-/* 클릭했을 때 (눌린 상태) */
-QPushButton:pressed {
-    background: #e1e5ee;
-    color: #0f1117;
-    border: 1px solid #b8bfd0;
-}</string>
-     </property>
-     <property name="text">
-      <string>버튼 상태</string>
-     </property>
-    </widget>
    </widget>
    <widget class="QFrame" name="frame_4">
     <property name="geometry">
@@ -1120,7 +1011,7 @@ QPushButton:pressed {
       <x>20</x>
       <y>490</y>
       <width>1031</width>
-      <height>201</height>
+      <height>211</height>
      </rect>
     </property>
     <property name="font">
@@ -1170,7 +1061,7 @@ QPushButton:pressed {
      <property name="geometry">
       <rect>
        <x>360</x>
-       <y>90</y>
+       <y>95</y>
        <width>311</width>
        <height>51</height>
       </rect>
@@ -1211,7 +1102,7 @@ QPushButton:pressed {
      <property name="geometry">
       <rect>
        <x>700</x>
-       <y>90</y>
+       <y>95</y>
        <width>311</width>
        <height>51</height>
       </rect>
@@ -1252,7 +1143,7 @@ QPushButton:pressed {
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>90</y>
+       <y>95</y>
        <width>311</width>
        <height>51</height>
       </rect>
