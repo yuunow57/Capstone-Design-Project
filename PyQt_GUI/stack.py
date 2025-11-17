@@ -103,6 +103,23 @@ class StackApp(QtWidgets.QMainWindow):
             else:
                 btn.setStyleSheet(style + "color: #333333;")
 
+    def closeEvent(self, event):
+        """
+        프로그램 종료 시 Serial 포트가 열려 있다면 자동으로 닫아주는 함수.
+        포트가 닫히지 않으면 운영체제가 포트를 계속 점유하여
+        다음 실행에서 연결이 안 되는 문제를 방지한다.
+        """
+        try:
+            if hasattr(self, "setting_controller"):
+                serial = self.setting_controller.serial
+                if serial.port and serial.port.is_open:
+                    serial.port.close()
+                    print("🔌 시리얼 포트 정상 종료됨")
+        except Exception as e:
+            print(f"⚠️ 시리얼 포트 종료 중 오류: {e}")
+
+        event.accept()
+
 
 def remove_color_from_stylesheet(style):
     import re

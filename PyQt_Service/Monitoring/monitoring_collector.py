@@ -1,5 +1,6 @@
 import threading
 import time
+import re
 from PyQt_Service.Database.db import db
 from PyQt_Service.Log.log_manager import LogManager
 
@@ -31,11 +32,11 @@ class MonitoringCollector:
 
             # 0) 연결 체크
             if not self.serial.is_connected:
-                LogManager.instance().log("⚠️ 수집 실패 – 시리얼 연결 안됨")
+                LogManager.instance().log("❌ 수집 실패 – 시리얼 연결 안됨")
                 time.sleep(60)
                 continue
 
-            # 1) 명령 전송
+            # 1) $ue 명령 전송
             sent = self.serial.send("$ue")
             if not sent:
                 LogManager.instance().log("⚠️ $ue 전송 실패 – 저장 안함")
@@ -44,15 +45,13 @@ class MonitoringCollector:
 
             LogManager.instance().log("📤 $ue 명령 전송됨")
 
+            # 아두이노 처리시간 약간 기다림
             time.sleep(0.3)
 
             # 2) 응답 여러 줄 수신
             lines = []
-            for _ in range(20):
-                try:
-                    line = self.serial.read_line()
-                except:
-                    line = None
+            for _ in range(30):
+                line = self.serial.read_line()
                 if line:
                     lines.append(line)
 
@@ -61,7 +60,7 @@ class MonitoringCollector:
                 time.sleep(60)
                 continue
 
-            LogManager.instance().log(f"📥 응답 수신: {len(lines)}줄")
+            LogManager.instance().log(f"📥 응답 {len(lines)}줄 수신")
 
             # 3) 파싱
             parsed = self.parse_system_status(lines)
@@ -85,36 +84,59 @@ class MonitoringCollector:
             else:
                 LogManager.instance().log("❌ DB 저장 실패")
 
-            # 다음 주기
             time.sleep(60)
 
     # ========================================
-    # 데이터 파싱
+    # 파싱 (아두이노 $ue 출력 맞춤)
     # ========================================
     @staticmethod
     def parse_system_status(lines):
-        v = i = p = None
+        """
+        아두이노 printSystemStatus() 출력 예시:
+
+        Voltage: 14.21 V
+        Current: 0.123 A
+        Max Current: 0.456 A   (무시)
+        Power: 5.67 W
+        ...
+        """
+
+        solar_v = None
+        solar_i = None
+        solar_p = None
+
+        # float 추출 정규식
+        num_re = re.compile(r"[-]?[0-9]*\.?[0-9]+")
 
         for line in lines:
-            if "Voltage:" in line:
-                v = MonitoringCollector.extract_number(line)
-            elif "Current:" in line and "Max" not in line:
-                i = MonitoringCollector.extract_number(line)
-            elif "Power:" in line:
-                p = MonitoringCollector.extract_number(line)
+            text = line.strip()
 
-        if v is None or i is None or p is None:
+            # Voltage
+            if "Voltage:" in text and solar_v is None:
+                m = num_re.findall(text)
+                if m:
+                    solar_v = float(m[0])
+                continue
+
+            # Current (Max Current 제외!)
+            if "Current:" in text and "Max" not in text and solar_i is None:
+                m = num_re.findall(text)
+                if m:
+                    solar_i = float(m[0])
+                continue
+
+            # Power
+            if "Power:" in text and solar_p is None:
+                m = num_re.findall(text)
+                if m:
+                    solar_p = float(m[0])
+                continue
+
+        # 값 3개 다 있어야 성공
+        if solar_v is None or solar_i is None or solar_p is None:
             return None
 
-        return {"v": v, "i": i, "p": p}
-
-    @staticmethod
-    def extract_number(text):
-        try:
-            num = "".join(c for c in text if (c.isdigit() or c == "."))
-            return float(num)
-        except:
-            return None
+        return {"v": solar_v, "i": solar_i, "p": solar_p}
 
     # ========================================
     # DB 저장
@@ -130,6 +152,7 @@ class MonitoringCollector:
             cur.execute(sql, (data['v'], data['i'], data['p']))
             conn.commit()
             return True
+
         except Exception as e:
             LogManager.instance().log(f"DB Error: {e}")
             return False
