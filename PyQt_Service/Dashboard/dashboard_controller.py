@@ -10,6 +10,7 @@ from matplotlib.figure import Figure
 
 from PyQt_Service.Monitoring.monitoring_repository import MonitoringRepository
 from PyQt_Service.Log.log_service import LogService
+from PyQt_Service.Log.log_manager import LogManager
 
 class DashboardController(QtCore.QObject):
     """
@@ -44,7 +45,7 @@ class DashboardController(QtCore.QObject):
         # ─────────────────────────────────────────────
         # 📌 Matplotlib 그래프 설정
         # ─────────────────────────────────────────────
-        self.fig = Figure(figsize=(4, 3))
+        self.fig = Figure(figsize=(4, 2))
         self.canvas = FigureCanvas(self.fig)
 
         layout = QtWidgets.QVBoxLayout(self.graph_widget)
@@ -78,45 +79,66 @@ class DashboardController(QtCore.QObject):
             voltage = self.read_total_voltage()
             now = datetime.now().strftime("%H:%M")
 
-            self.time_buffer.append(now)
-            self.voltage_buffer.append(voltage)
+            if voltage is not None:
+                self.time_buffer.append(now)
+                self.voltage_buffer.append(voltage)
+            else:
+                # 실패 시 그래프에 공백을 넣지 않음
+                LogManager.instance().log("⚠️ 총전압 갱신 실패 (None)")
 
+            # 버퍼 유지
             if len(self.voltage_buffer) > self.buffer_limit:
                 self.time_buffer.pop(0)
                 self.voltage_buffer.pop(0)
 
             self.update_graph()
-
-            time.sleep(60)  # 1분마다
+            time.sleep(60)
 
     # ===============================================================
     # 총전압 읽기 ($re 명령)
     # ===============================================================
     def read_total_voltage(self) -> float:
         """
-        아두이노에서 '$re' 명령으로 Total 전압을 읽음.
-        실패 시 테스트용 랜덤값 반환.
+        아두이노 '$re' 명령 응답:
+        예) "A3 (Total) - ADC: 1234 | Voltage: 13.456V"
+        여기서 Voltage 뒤 숫자만 파싱해 float로 반환
         """
         try:
-            # SerialManager 구조:
-            #   self.port: serial.Serial 객체
-            #   self.is_connected: bool
             if self.serial.is_connected and self.serial.port:
-                # '$re' + 'e' 형식으로 맞춰 줄 수도 있음
-                # 아두이노 쪽 프로토콜에 맞게 필요하면 수정
-                self.serial.port.write(b"$re")
-                line = self.serial.port.readline().decode().strip()
 
-                # 숫자와 '.'만 추출
-                value = "".join(c for c in line if (c.isdigit() or c == "."))
-                if value:
-                    return float(value)
+                # 1) 명령 전송
+                self.serial.port.write(b"$re\n")
+                time.sleep(0.1)
+
+                # 2) 응답 한 줄 읽기
+                line = self.serial.port.readline().decode(errors="ignore").strip()
+
+                if not line:
+                    self.log.add("⚠️ 총전압 응답 없음")
+                    return None
+
+                # 3) "Voltage:" 포함된 부분만 찾기
+                if "Voltage" not in line:
+                    self.log.add(f"⚠️ 예상치 못한 응답: {line}")
+                    return None
+
+                # 4) 숫자만 추출
+                # ex) "A3 (Total) - ADC: 1234 | Voltage: 13.456V"
+                # → "13.456"
+                import re
+                match = re.search(r"Voltage:\s*([0-9\.]+)", line)
+                if match:
+                    voltage = float(match.group(1))
+                    self.log.add(f"총전압 수신 성공: {voltage} V")
+                    return voltage
+
+                self.log.add(f"⚠️ 전압 파싱 실패: {line}")
+                return None
+
         except Exception as e:
-            print("⚠️ read_total_voltage() ERROR:", e)
+            self.log.add(f"⚠️ read_total_voltage() 오류: {e}")
 
-        # 하드웨어 연결 안 되었을 때 테스트 값
-        import random
-        return round(random.uniform(11.0, 14.0), 2)
+        return None
 
     # ===============================================================
     # 태양광발전 최신값(solar_p) 가져오기
@@ -147,10 +169,9 @@ class DashboardController(QtCore.QObject):
             ax.plot(self.time_buffer, self.voltage_buffer,
                     color="#4C934C", linewidth=1.8)
 
-        ax.set_ylabel("Battery Total Voltage (V)")
-        ax.set_xlabel("Time (1min interval)")
         ax.grid(True)
-        ax.tick_params(axis="x", labelrotation=45, labelsize=8)
+        ax.tick_params(axis="y", labelsize=7)
+        ax.tick_params(axis="x", labelsize=7)
         
 
         self.canvas.draw_idle()
@@ -159,40 +180,67 @@ class DashboardController(QtCore.QObject):
     # UI 업데이트 (매 1초)
     # ===============================================================
     def update_ui(self):
-        # 기존 UI 업데이트 코드…
 
-        # ─────────────────────────────────────
-        # 시스템 상태 업데이트
-        # ─────────────────────────────────────
+        # ===============================================================
+        # 1) 현재 시각
+        # ===============================================================
+        now = datetime.now().strftime("%H:%M:%S")
+        if self.label_time:
+            self.label_time.setText(
+                f"<html><body><p>"
+                f"<span style='font-size:14pt;'>현재 시각 : </span>"
+                f"<span style='font-size:14pt; color:#00ac00;'>{now}</span>"
+                f"</p></body></html>"
+            )
 
-        # 파일럿 램프
-        pilot_green = self.system_state["pilot_green"]
-        pilot_red = self.system_state["pilot_red"]
+        # ===============================================================
+        # 2) 이차전지 모듈 상태
+        # ===============================================================
+        if self.voltage_buffer:
+            latest_voltage = self.voltage_buffer[-1]
+            batt_text = f"{latest_voltage:.2f} V"
+        else:
+            batt_text = "---- V"
 
-        # text_pilot = ""
-        # if pilot_green:
-        #     text_pilot = "파일럿램프: <b style='color:green'>GREEN ON</b>"
-        # elif pilot_red:
-        #     text_pilot = "파일럿램프: <b style='color:red'>RED ON</b>"
-        # else:
-        #     text_pilot = "파일럿램프: OFF"
+        if self.label_batt:
+            self.label_batt.setText(
+                f"<html><body><p>"
+                f"<span style='font-size:14pt;'>이차전지 모듈 상태 : </span>"
+                f"<span style='font-size:14pt; color:#00ac00;'>{batt_text}</span>"
+                f"</p></body></html>"
+            )
 
-        # self.ui.label_pilot.setText(text_pilot)
+        # ===============================================================
+        # 3) 태양광 발전 데이터
+        # ===============================================================
+        try:
+            solar_p = self.get_latest_solar_power()
+            solar_text = f"{solar_p:.2f} W"
+        except:
+            solar_text = "0.00 W"
 
-        # # 상용 선풍기
-        # if self.system_state["fan_commercial"]:
-        #     self.ui.label_fan_commercial.setText("상용 선풍기: <b style='color:green'>ON</b>")
-        # else:
-        #     self.ui.label_fan_commercial.setText("상용 선풍기: OFF")
+        if self.label_solar:
+            self.label_solar.setText(
+                f"<html><body><p>"
+                f"<span style='font-size:14pt;'>태양광 발전 데이터 : </span>"
+                f"<span style='font-size:14pt; color:#930b0d;'>{solar_text}</span>"
+                f"</p></body></html>"
+            )
 
-        # # 배터리 선풍기
-        # if self.system_state["fan_battery"]:
-        #     self.ui.label_fan_battery.setText("배터리 선풍기: <b style='color:green'>ON</b>")
-        # else:
-        #     self.ui.label_fan_battery.setText("배터리 선풍기: OFF")
+        # ===============================================================
+        # 4) 연결 상태
+        # ===============================================================
+        if self.serial.is_connected:
+            status_color = "#0014a9"
+            status_text = "정상"
+        else:
+            status_color = "#930b0d"
+            status_text = "연결해제"
 
-        # # 할로겐
-        # if self.system_state["halogen"]:
-        #     self.ui.label_halogen.setText("할로겐 램프: <b style='color:green'>ON</b>")
-        # else:
-        #     self.ui.label_halogen.setText("할로겐 램프: OFF")
+        if self.label_status:
+            self.label_status.setText(
+                f"<html><body><p>"
+                f"<span style='font-size:14pt;'>연결 상태 : </span>"
+                f"<span style='font-size:14pt; color:{status_color};'>{status_text}</span>"
+                f"</p></body></html>"
+            )
