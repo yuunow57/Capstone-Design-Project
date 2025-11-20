@@ -9,6 +9,9 @@ class SettingController:
         self.ui = ui
         self.system_state = system_state
 
+        # StackApp 에서 대시보드 컨트롤러 주입 예정
+        self.dashboard = None
+
         # Serial
         self.serial = SerialManager()
         self.command = CommandService(self.serial)
@@ -16,6 +19,19 @@ class SettingController:
         self._connect_ui()
         self.refresh_ports()
 
+    # ─────────────────────────────────────
+    # 대시보드에 UI 갱신 요청
+    # ─────────────────────────────────────
+    def _notify_dashboard(self):
+        if self.dashboard is not None:
+            try:
+                self.dashboard.update_ui()
+            except Exception as e:
+                LogManager.instance().log(f"대시보드 갱신 오류: {e}")
+
+    # ─────────────────────────────────────
+    # UI 연결
+    # ─────────────────────────────────────
     def _connect_ui(self):
 
         # USB
@@ -39,7 +55,7 @@ class SettingController:
         self.ui.chk_fan_battery_on.clicked.connect(self.fan_battery_on)
         self.ui.chk_fan_battery_off.clicked.connect(self.fan_battery_off)
 
-        # 모니터링 명령어
+        # ⭐ 로그가 필요한 버튼 3개 (j, k, u)
         self.ui.btn_battery_voltage.clicked.connect(self.command.print_battery_voltage)
         self.ui.btn_vcmon_data.clicked.connect(self.command.print_vcmon_data)
         self.ui.btn_system_status.clicked.connect(self.command.print_system_status)
@@ -52,7 +68,6 @@ class SettingController:
     # =====================
     # USB 포트 새로고침
     # =====================
-
     def refresh_ports(self):
         ports = self.serial.list_ports()
         self.ui.port_combo.clear()
@@ -63,31 +78,15 @@ class SettingController:
             return
 
         for p in ports:
-            # 💡 1) ListPortInfo 객체인 경우
-            if hasattr(p, "device"):
-                device = p.device
-                desc = p.description if hasattr(p, "description") else "Unknown Device"
+            device = p.device if hasattr(p, "device") else str(p)
+            desc = p.description if hasattr(p, "description") else "Unknown Device"
+            self.ui.port_combo.addItem(f"{device} ({desc})")
 
-            # 💡 2) tuple 형태인 경우
-            elif isinstance(p, tuple):
-                # 예: ("COM3", "USB-SERIAL CH340", something)
-                device = p[0]
-                desc = p[1] if len(p) > 1 else "Unknown Device"
-
-            else:
-                # 완전 예외적일 때
-                device = str(p)
-                desc = "Unknown Device"
-
-            text = f"{device} ({desc})"
-            self.ui.port_combo.addItem(text)
-
-        LogManager.instance().log(f"포트 목록 새로고침 (총 {len(ports)}개)")
+        LogManager.instance().log(f"포트 목록 새로고침 ({len(ports)}개)")
 
     # =====================
     # USB 연결
     # =====================
-
     def connect_serial(self):
         selected = self.ui.port_combo.currentText()
 
@@ -97,9 +96,7 @@ class SettingController:
             self.ui.label_connect_status.setStyleSheet("color:#930B0D;")
             return
 
-        # "COM3 (CH340 USB-SERIAL)" → "COM3"만 추출
         port = selected.split(" ")[0]
-
         ok = self.serial.connect(port)
 
         if ok:
@@ -111,57 +108,61 @@ class SettingController:
             self.ui.label_connect_status.setStyleSheet("color:#930B0D;")
             LogManager.instance().log(f"포트 연결 실패 ({port})")
 
-    # =====================
-    # 파일럿 램프
-    # =====================
+        self._notify_dashboard()
 
+    # =====================
+    # 파일럿 램프 (소프트웨어 상태만 변경)
+    # =====================
     def pilot_green(self):
-        if self.command.pilot_green():
-            self.system_state["pilot_green"] = True
-            self.system_state["pilot_red"] = False
+        self.command.pilot_green()
+        self.system_state["pilot"] = "GREEN"
+        self._notify_dashboard()
 
     def pilot_red(self):
-        if self.command.pilot_red():
-            self.system_state["pilot_red"] = True
-            self.system_state["pilot_green"] = False
+        self.command.pilot_red()
+        self.system_state["pilot"] = "RED"
+        self._notify_dashboard()
 
     def pilot_off(self):
-        if self.command.pilot_off():
-            self.system_state["pilot_green"] = False
-            self.system_state["pilot_red"] = False
+        self.command.pilot_off()
+        self.system_state["pilot"] = "OFF"
+        self._notify_dashboard()
 
     # =====================
     # 할로겐
     # =====================
-
     def halogen_on(self):
         if self.command.halogen_on():
             self.system_state["halogen"] = True
+            self._notify_dashboard()
 
     def halogen_off(self):
         if self.command.halogen_off():
             self.system_state["halogen"] = False
+            self._notify_dashboard()
 
     # =====================
     # 상용 선풍기
     # =====================
-
     def fan_commercial_on(self):
         if self.command.fan_commercial_on():
             self.system_state["fan_commercial"] = True
+            self._notify_dashboard()
 
     def fan_commercial_off(self):
         if self.command.fan_commercial_off():
             self.system_state["fan_commercial"] = False
+            self._notify_dashboard()
 
     # =====================
     # 배터리 선풍기
     # =====================
-
     def fan_battery_on(self):
         if self.command.fan_battery_on():
             self.system_state["fan_battery"] = True
+            self._notify_dashboard()
 
     def fan_battery_off(self):
         if self.command.fan_battery_off():
             self.system_state["fan_battery"] = False
+            self._notify_dashboard()

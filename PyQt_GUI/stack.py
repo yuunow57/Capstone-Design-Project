@@ -23,7 +23,9 @@ class StackApp(QtWidgets.QMainWindow):
 
         # main UI 로드 (대시보드 메인 윈도우)
         uic.loadUi(os.path.join(base_path, "dashboard.ui"), self)
-        self.stack: QtWidgets.QStackedWidget = self.findChild(QtWidgets.QStackedWidget, "stackedWidget")
+        self.stack: QtWidgets.QStackedWidget = self.findChild(
+            QtWidgets.QStackedWidget, "stackedWidget"
+        )
 
         # 각 페이지 로드
         dashboard_page = self.stack.widget(0)  # 대시보드 첫 페이지
@@ -40,8 +42,7 @@ class StackApp(QtWidgets.QMainWindow):
 
         # 시스템 상태 (대시보드 + 설정 페이지에서 공유)
         self.system_state = {
-            "pilot_green": False,
-            "pilot_red": False,
+            "pilot": "RED",          # 기본 RED
             "halogen": False,
             "fan_commercial": False,
             "fan_battery": False,
@@ -54,7 +55,9 @@ class StackApp(QtWidgets.QMainWindow):
         # 🔹 모니터링 컨트롤러
         self.monitoring_controller = MonitoringController(page_sungp)
         # CSV 보기 버튼
-        page_sungp.btn_show_csv.clicked.connect(self.monitoring_controller.show_csv_table)
+        page_sungp.btn_show_csv.clicked.connect(
+            self.monitoring_controller.show_csv_table
+        )
 
         # 🔹 설정 컨트롤러
         self.setting_controller = SettingController(page_setting, self.system_state)
@@ -68,17 +71,19 @@ class StackApp(QtWidgets.QMainWindow):
             self.setting_controller.serial,
             self.setting_controller.system_state,
         )
+        
+        self.setting_controller.dashboard = self.dashboard_controller
 
         # 페이지 리스트 (버튼 순서와 매칭)
         self.pages = [dashboard_page, page_sungp, page_log, page_setting, page_info]
 
         # 왼쪽 메뉴 버튼들
         self.buttons = [
-            self.pushButton,   # 대시보드
-            self.pushButton_2, # 태양광 M
-            self.pushButton_3, # 로그
-            self.pushButton_4, # 설정
-            self.pushButton_5  # 정보
+            self.pushButton,  # 대시보드
+            self.pushButton_2,  # 태양광 M
+            self.pushButton_3,  # 로그
+            self.pushButton_4,  # 설정
+            self.pushButton_5,  # 정보
         ]
 
         # 버튼 클릭 시 페이지 변경
@@ -87,10 +92,12 @@ class StackApp(QtWidgets.QMainWindow):
 
         # 종료 버튼
         self.pushButton_6.clicked.connect(self.close)
-        self.pushButton_6.setStyleSheet("text-align: left; padding-left: 10px; color: #333333;")
+        self.pushButton_6.setStyleSheet(
+            "text-align: left; padding-left: 10px; color: #333333;"
+        )
 
         # 초기 페이지: 대시보드
-        self.change_page(self.pages[0])        
+        self.change_page(self.pages[0])
 
     def change_page(self, page):
         self.stack.setCurrentWidget(page)
@@ -123,7 +130,8 @@ class StackApp(QtWidgets.QMainWindow):
 
 def remove_color_from_stylesheet(style):
     import re
-    return re.sub(r'color\s*:\s*#[0-9A-Fa-f]+;', '', style)
+
+    return re.sub(r"color\s*:\s*#[0-9A-Fa-f]+;", "", style)
 
 
 if __name__ == "__main__":

@@ -394,10 +394,10 @@ void updatePilotLampOutput()
       digitalWrite(PILOT_LAMP_GREEN_RED_OUTPUT_PIN, HIGH);  // 릴레이 ON → NC 접점 → 적색 점등 (반전 수정)
       break;
     case PILOT_LAMP_GREEN:
-      digitalWrite(PILOT_LAMP_GREEN_RED_OUTPUT_PIN, LOW);   // 릴레이 OFF → NO 접점 → 녹색 점등 (반전 수정)
+      digitalWrite(PILOT_LAMP_GREEN_RED_OUTPUT_PIN, HIGH);   // 릴레이 OFF → NO 접점 → 녹색 점등 (반전 수정)
       break;
     case PILOT_LAMP_RED:
-      digitalWrite(PILOT_LAMP_GREEN_RED_OUTPUT_PIN, HIGH);  // 릴레이 ON → NC 접점 → 적색 점등 (반전 수정)
+      digitalWrite(PILOT_LAMP_GREEN_RED_OUTPUT_PIN, LOW);  // 릴레이 ON → NC 접점 → 적색 점등 (반전 수정)
       break;
   }
 }

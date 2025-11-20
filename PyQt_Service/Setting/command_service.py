@@ -1,4 +1,6 @@
 from PyQt_Service.Log.log_manager import LogManager
+import time
+
 
 class CommandService:
     """
@@ -36,102 +38,126 @@ class CommandService:
         }
 
     # ─────────────────────────────────────
-    # 내부 송신 함수
+    # 내부 송신 함수 + 아두이노 응답 읽기(Log 출력)
     # ─────────────────────────────────────
-    def _send(self, char):
+    def _send(self, char: str) -> bool:
         packet = f"${char}e"
         label = self.command_label.get(char, f"명령 {char}")
 
         ok = self.serial.send(packet)
 
+        # 명령 전송 로그
         if ok:
-            LogManager.instance().log(f"{label} - 성공")
+            LogManager.instance().log(f"{label} → 전송됨")
         else:
-            LogManager.instance().log(f"{label} - 실패 (연결 안됨)")
+            LogManager.instance().log(f"{label} → 실패 (포트 미연결)")
+            return False
+
+        # 0.15초 대기 (아두이노 반응 시간)
+        time.sleep(0.15)
+
+        # 아두이노 응답 읽기 (최대 2초)
+        deadline = time.time() + 2.0
+        response_lines = []
+        while time.time() < deadline:
+            line = self.serial.read_line()
+            if not line:
+                continue
+
+            response_lines.append(line)
+
+        # 로그 출력
+        if response_lines:
+            for line in response_lines:
+                LogManager.instance().log(f"[응답] {line}")
+        else:
+            LogManager.instance().log(f"[응답 없음] ({label})")
+
+        return True
 
     # ─────────────────────────────────────
     # 파일럿 램프
     # ─────────────────────────────────────
-    def pilot_off(self):
-        self._send("a")
+    def pilot_off(self) -> bool:
+        return self._send("a")
 
-    def pilot_green(self):
-        self._send("b")
+    def pilot_green(self) -> bool:
+        return self._send("b")
 
-    def pilot_red(self):
-        self._send("c")
+    def pilot_red(self) -> bool:
+        return self._send("c")
 
     # ─────────────────────────────────────
     # 선풍기 — 상용(SMPS)
     # ─────────────────────────────────────
-    def fan_commercial_on(self):
-        self._send("d")
+    def fan_commercial_on(self) -> bool:
+        return self._send("d")
 
-    def fan_commercial_off(self):
-        self._send("e")
+    def fan_commercial_off(self) -> bool:
+        return self._send("e")
 
     # ─────────────────────────────────────
     # 선풍기 — 배터리 모듈
     # ─────────────────────────────────────
-    def fan_battery_on(self):
-        self._send("f")
+    def fan_battery_on(self) -> bool:
+        return self._send("f")
 
-    def fan_battery_off(self):
-        self._send("g")
+    def fan_battery_off(self) -> bool:
+        return self._send("g")
 
     # ─────────────────────────────────────
     # 할로겐 램프
     # ─────────────────────────────────────
-    def halogen_on(self):
-        self._send("h")
+    def halogen_on(self) -> bool:
+        return self._send("h")
 
-    def halogen_off(self):
-        self._send("i")
+    def halogen_off(self) -> bool:
+        return self._send("i")
 
     # ─────────────────────────────────────
     # 배터리/VC_MON 데이터 출력
     # ─────────────────────────────────────
-    def print_battery_voltage(self):
-        self._send("j")
+    def print_battery_voltage(self) -> bool:
+        return self._send("j")
 
-    def print_vcmon_data(self):
-        self._send("k")
+    def print_vcmon_data(self) -> bool:
+        return self._send("k")
 
-    def reset_vcmon_data(self):
-        self._send("l")
+    def reset_vcmon_data(self) -> bool:
+        return self._send("l")
 
-    def start_vcmon_auto(self):
-        self._send("m")
+    def start_vcmon_auto(self) -> bool:
+        return self._send("m")
 
-    def stop_vcmon_auto(self):
-        self._send("n")
+    def stop_vcmon_auto(self) -> bool:
+        return self._send("n")
 
     # ─────────────────────────────────────
     # 개별 전압
     # ─────────────────────────────────────
-    def read_1s(self):
-        self._send("o")
+    def read_1s(self) -> bool:
+        return self._send("o")
 
-    def read_2s(self):
-        self._send("p")
+    def read_2s(self) -> bool:
+        return self._send("p")
 
-    def read_3s(self):
-        self._send("q")
+    def read_3s(self) -> bool:
+        return self._send("q")
 
-    def read_total(self):
-        self._send("r")
+    def read_total(self) -> bool:
+        return self._send("r")
 
     # ─────────────────────────────────────
     # 기타 시스템 정보
     # ─────────────────────────────────────
-    def print_voltage_calibration(self):
-        self._send("s")
+    def print_voltage_calibration(self) -> bool:
+        return self._send("s")
 
-    def print_all_voltages(self):
-        self._send("t")
+    def print_all_voltages(self) -> bool:
+        return self._send("t")
 
-    def print_system_status(self):
-        self._send("u")
+    def print_system_status(self) -> bool:
+        return self._send("u")
 
-    def reset_solar_data(self):
-        self._send("v")
+    def reset_solar_data(self) -> bool:
+        return self._send("v")

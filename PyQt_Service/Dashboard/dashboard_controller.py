@@ -67,7 +67,7 @@ class DashboardController(QtCore.QObject):
         self.thread.start()
 
     # ===============================================================
-    # 1분마다 총전압 읽기 ($re)
+    # 1분마다 총전압 읽기
     # ===============================================================
     def collect_voltage(self):
         while True:
@@ -88,39 +88,55 @@ class DashboardController(QtCore.QObject):
             time.sleep(60)
 
     # ===============================================================
-    # '$re' → 총전압 읽기
+    # '$re' → 총전압 읽기 (자동 데이터 섞임 방지)
     # ===============================================================
     def read_total_voltage(self) -> float:
         try:
-            if self.serial.is_connected and self.serial.port:
-                self.serial.port.write(b"$re\n")
-                time.sleep(0.1)
+            if not (self.serial.is_connected and self.serial.port):
+                return None
 
-                line = self.serial.port.readline().decode(errors="ignore").strip()
+            # 🔥 명령 보내기 전 버퍼 정리
+            self.serial.port.reset_input_buffer()
 
-                if not line:
-                    self.log.add("⚠️ 총전압 응답 없음")
-                    return None
+            # 🔥 명령 전송
+            self.serial.port.write(b"$re")
+            self.serial.port.flush()
 
-                if "Voltage" not in line:
-                    self.log.add(f"⚠️ 예상치 못한 응답: {line}")
-                    return None
+            deadline = time.time() + 1.0
+            line = ""
 
-                import re
-                match = re.search(r"Voltage:\s*([0-9\.]+)", line)
-                if match:
-                    voltage = float(match.group(1))
-                    self.log.add(f"총전압 수신 성공: {voltage} V")
-                    return voltage
+            # 🔥 "Voltage:" 포함될 때까지 여러 줄 읽기
+            while time.time() < deadline:
+                raw = self.serial.port.readline().decode(errors="ignore").strip()
 
-                self.log.add(f"⚠️ 전압 파싱 실패: {line}")
+                if not raw:
+                    continue
+
+                if "Voltage:" in raw:
+                    line = raw
+                    break
+
+            if not line:
+                self.log.add("⚠️ 총전압 응답 없음")
+                return None
+
+            # "Voltage: 12.34V" 파싱
+            import re
+            match = re.search(r"Voltage:\s*([0-9.]+)", line)
+            if match:
+                voltage = float(match.group(1))
+                self.log.add(f"총전압 수신 성공: {voltage} V")
+                return voltage
+
+            self.log.add(f"⚠️ 전압 파싱 실패: {line}")
+
         except Exception as e:
             self.log.add(f"⚠️ read_total_voltage 오류: {e}")
 
         return None
 
     # ===============================================================
-    # measurement 테이블에서 solar_p 최신 값 가져오기
+    # DB에서 solar_p 최신 값 가져오기
     # ===============================================================
     def get_latest_solar_power(self) -> float:
         row = self.repo.get_latest_measurement()
@@ -150,42 +166,13 @@ class DashboardController(QtCore.QObject):
         self.canvas.draw_idle()
 
     # ===============================================================
-    # ⭐ 아두이노 장치 상태 요청 ($state)
-    # ===============================================================
-    def get_device_states(self):
-        """
-        아두이노 → '$state' 명령  
-        응답 예시:
-            STATE: PL=1, CF=0, BF=1, HL=0
-        """
-        if not (self.serial.is_connected and self.serial.port):
-            return None
-
-        try:
-            self.serial.port.write(b"$state\n")
-            time.sleep(0.1)
-
-            line = self.serial.port.readline().decode(errors="ignore").strip()
-            if not line:
-                return None
-
-            import re
-            m = re.findall(r"(PL|CF|BF|HL)=([01])", line)
-
-            if not m:
-                return None
-
-            return {key: int(val) for key, val in m}
-
-        except:
-            return None
-
-    # ===============================================================
     # UI 업데이트 (1초)
     # ===============================================================
     def update_ui(self):
 
-        # (1) 현재 시각
+        # ─────────────────────────────────────────────
+        # (1) 현재 시각 — 14pt
+        # ─────────────────────────────────────────────
         now = datetime.now().strftime("%H:%M:%S")
         if self.label_time:
             self.label_time.setText(
@@ -195,7 +182,9 @@ class DashboardController(QtCore.QObject):
                 f"</p></body></html>"
             )
 
-        # (2) 이차전지 모듈 상태 (그래프용 전압)
+        # ─────────────────────────────────────────────
+        # (2) 이차전지 모듈 상태 — 14pt
+        # ─────────────────────────────────────────────
         if self.voltage_buffer:
             latest_voltage = self.voltage_buffer[-1]
             batt_text = f"{latest_voltage:.2f} V"
@@ -211,7 +200,9 @@ class DashboardController(QtCore.QObject):
                 f"</p></body></html>"
             )
 
-        # (3) 태양광 발전 데이터 (DB에서)
+        # ─────────────────────────────────────────────
+        # (3) 태양광 발전 데이터 — 14pt
+        # ─────────────────────────────────────────────
         solar_p = self.get_latest_solar_power()
         if self.label_solar:
             self.label_solar.setText(
@@ -221,7 +212,9 @@ class DashboardController(QtCore.QObject):
                 f"</p></body></html>"
             )
 
-        # (4) 연결 상태
+        # ─────────────────────────────────────────────
+        # (4) 연결 상태 — 14pt
+        # ─────────────────────────────────────────────
         if self.serial.is_connected:
             status_color = "#0014a9"
             status_text = "정상"
@@ -238,27 +231,28 @@ class DashboardController(QtCore.QObject):
             )
 
         # ===============================================================
-        # ⭐ (5) 시스템 상태 4개 표시 (기본 텍스트 유지하고 오른쪽에만 상태 표시)
+        # ⭐ 아래는 기존 시스템 상태(파일럿/팬/할로겐) — 그대로 유지
         # ===============================================================
 
-        # ─────────────────────────────────────────────
-        # 파일럿 램프 — 전압으로 자동 판단
-        # ─────────────────────────────────────────────
+        # 파일럿 램프
         if hasattr(self, "label_pilot"):
-            pilot_on = latest_voltage >= 10.0
-            color = "#00ac00" if pilot_on else "#930b0d"
-            state = "ON" if pilot_on else "OFF"
+            pilot_state = self.system_state.get("pilot", "RED")  # 기본 RED
+
+            if pilot_state == "RED":
+                color = "#930b0d"
+            elif pilot_state == "GREEN":
+                color = "#00ac00"
+            else:  # "OFF"
+                color = "#666666"
 
             self.label_pilot.setText(
                 f"<html><body><p align='center'>"
                 f"<span style='font-size:14pt;'>🚦 파일럿 램프 : </span>"
-                f"<span style='font-size:14pt; color:{color};'>{state}</span>"
+                f"<span style='font-size:14pt; color:{color};'>{pilot_state}</span>"
                 f"</p></body></html>"
             )
 
-        # ─────────────────────────────────────────────
         # 상용 선풍기
-        # ─────────────────────────────────────────────
         if hasattr(self, "label_commercial_fan"):
             on = self.system_state.get("fan_commercial", False)
             color = "#00ac00" if on else "#930b0d"
@@ -271,9 +265,7 @@ class DashboardController(QtCore.QObject):
                 f"</p></body></html>"
             )
 
-        # ─────────────────────────────────────────────
         # 배터리 선풍기
-        # ─────────────────────────────────────────────
         if hasattr(self, "label_battery_fan"):
             on = self.system_state.get("fan_battery", False)
             color = "#00ac00" if on else "#930b0d"
@@ -286,9 +278,7 @@ class DashboardController(QtCore.QObject):
                 f"</p></body></html>"
             )
 
-        # ─────────────────────────────────────────────
         # 할로겐 램프
-        # ─────────────────────────────────────────────
         if hasattr(self, "label_halogen"):
             on = self.system_state.get("halogen", False)
             color = "#00ac00" if on else "#930b0d"
