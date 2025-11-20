@@ -115,12 +115,12 @@ class SettingController:
     # =====================
     def pilot_green(self):
         self.command.pilot_green()
-        self.system_state["pilot"] = "GREEN"
+        self.system_state["pilot"] = "RED"
         self._notify_dashboard()
 
     def pilot_red(self):
         self.command.pilot_red()
-        self.system_state["pilot"] = "RED"
+        self.system_state["pilot"] = "GREEN"
         self._notify_dashboard()
 
     def pilot_off(self):

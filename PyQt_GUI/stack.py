@@ -12,7 +12,6 @@ from PyQt_Service.Setting.setting_controller import SettingController
 from PyQt_Service.Dashboard.dashboard_controller import DashboardController
 from PyQt_Service.Log.log_controller import LogController
 from PyQt_Service.Log.log_manager import LogManager
-from PyQt_Service.Monitoring.monitoring_collector import MonitoringCollector
 
 
 class StackApp(QtWidgets.QMainWindow):
@@ -53,17 +52,12 @@ class StackApp(QtWidgets.QMainWindow):
         LogManager.instance().set_controller(self.log_controller)
 
         # 🔹 모니터링 컨트롤러
-        self.monitoring_controller = MonitoringController(page_sungp)
-        # CSV 보기 버튼
-        page_sungp.btn_show_csv.clicked.connect(
-            self.monitoring_controller.show_csv_table
-        )
+        self.monitoring_controller = MonitoringController(page_sungp, self.system_state)
+        
 
         # 🔹 설정 컨트롤러
         self.setting_controller = SettingController(page_setting, self.system_state)
 
-        self.collector = MonitoringCollector(self.setting_controller.serial)
-        self.collector.start()
 
         # 🔹 대시보드 컨트롤러
         self.dashboard_controller = DashboardController(
@@ -135,6 +129,16 @@ def remove_color_from_stylesheet(style):
 
 
 if __name__ == "__main__":
+    from PyQt5.QtCore import Qt
+
+    # 🔹 High DPI 스케일링 활성화 (노트북/고해상도 화면 대응)
+    QtWidgets.QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
+    QtWidgets.QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
+
+    app = QtWidgets.QApplication(sys.argv)
+    window = StackApp()
+    window.show()
+    sys.exit(app.exec_())== "__main__"
     app = QtWidgets.QApplication(sys.argv)
     window = StackApp()
     window.show()

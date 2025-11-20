@@ -1,18 +1,31 @@
-import pandas as pd
+# PyQt_Service/Monitoring/monitoring_controller.py
+
+import random
+import time
+from PyQt5 import QtCore
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-import matplotlib.dates as mdates
-from PyQt_Service.Monitoring.monitoring_service import MonitoringService
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QTableWidget, QTableWidgetItem
-from PyQt_Service.Log.log_manager import LogManager
-from PyQt5 import QtCore
+from matplotlib.ticker import MaxNLocator
 
-class MonitoringController:
-    def __init__(self, ui):
+class MonitoringController(QtCore.QObject):
+    def __init__(self, ui, system_state):
+        super().__init__()
         self.ui = ui
-        self.service = MonitoringService()
+        self.system_state = system_state
 
-        # matplotlib Figure 4개 생성
+        # -------------------------------
+        # 그래프 데이터 버퍼
+        # -------------------------------
+        self.times = []       # 시간
+        self.voltages = []    # 전압
+        self.currents = []    # 전류
+        self.powers = []      # 전력
+        self.energy = 0       # 누적 전력(Wh 단위)
+        self.energy_list = [] # 그래프용
+
+        # -------------------------------
+        # Matplotlib 그래프 4개 생성
+        # -------------------------------
         self.fig_voltage = Figure(figsize=(4, 3))
         self.fig_current = Figure(figsize=(4, 3))
         self.fig_power = Figure(figsize=(4, 3))
@@ -23,142 +36,111 @@ class MonitoringController:
         self.canvas_power = FigureCanvas(self.fig_power)
         self.canvas_energy = FigureCanvas(self.fig_energy)
 
-        # UI Frame에 canvas 넣기
         self._setup_canvas()
 
-        # 그래프 기본 모드 설정
-        self.ui.comboBox_interval.currentTextChanged.connect(self.update_graphs)
-
-        # 초기 로드
-        self.update_graphs()
-
+        # -------------------------------
+        # 30초마다 난수 생성 타이머
+        # -------------------------------
         self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.update_graphs)
-        self.timer.start(60000)
+        self.timer.timeout.connect(self.generate_random_data)
+        self.timer.start(30000)  # 30초
 
+        # 첫 데이터 생성
+        self.generate_random_data()
+
+    # ---------------------------------------------------------
+    # UI Frame에 Canvas 집어넣기
+    # ---------------------------------------------------------
     def _setup_canvas(self):
-        # 전압
-        layout = self.ui.frame.layout()
-        if layout is None:
-            from PyQt5.QtWidgets import QVBoxLayout
-            layout = QVBoxLayout(self.ui.frame)
+        from PyQt5.QtWidgets import QVBoxLayout
+
+        layout = QVBoxLayout(self.ui.frame)
         layout.addWidget(self.canvas_voltage)
 
-        # 전류
-        layout = self.ui.frame_3.layout()
-        if layout is None:
-            from PyQt5.QtWidgets import QVBoxLayout
-            layout = QVBoxLayout(self.ui.frame_3)
+        layout = QVBoxLayout(self.ui.frame_3)
         layout.addWidget(self.canvas_current)
 
-        # 전력
-        layout = self.ui.frame_2.layout()
-        if layout is None:
-            from PyQt5.QtWidgets import QVBoxLayout
-            layout = QVBoxLayout(self.ui.frame_2)
+        layout = QVBoxLayout(self.ui.frame_2)
         layout.addWidget(self.canvas_power)
 
-        # 누적 전력량
-        layout = self.ui.frame_4.layout()
-        if layout is None:
-            from PyQt5.QtWidgets import QVBoxLayout
-            layout = QVBoxLayout(self.ui.frame_4)
+        layout = QVBoxLayout(self.ui.frame_4)
         layout.addWidget(self.canvas_energy)
 
-    def get_time_format(self, mode):
-        """
-        interval 모드에 맞는 matplotlib 시간 포맷 리턴
-        """
-        if mode == "1분":
-            return mdates.DateFormatter('%H:%M')
-        elif mode == "10분":
-            return mdates.DateFormatter('%H:%M')
-        elif mode == "1시간":
-            return mdates.DateFormatter('%H')
-        elif mode == "24시간":
-            return mdates.DateFormatter('%m-%d')
+    # ---------------------------------------------------------
+    # 할로겐 상태 기반 난수 생성
+    # ---------------------------------------------------------
+    def generate_random_data(self):
+        halogen_on = self.system_state.get("halogen", False)
+
+        if halogen_on:
+            voltage = random.uniform(17.0, 22.0)
+            current = random.uniform(0.06, 0.15)
         else:
-            return mdates.DateFormatter('%m-%d %H:%M')
-    
+            voltage = random.uniform(0.0, 2.0)
+            current = random.uniform(0, 0.02)
+
+        power = voltage * current
+
+        # 누적 전력(Wh) 계산: 30초 = 0.00833시간
+        self.energy += power * (30 / 3600)
+        self.energy_list.append(self.energy)
+
+        # 시계열 데이터 저장
+        current_time = time.strftime("%H:%M:%S")
+        self.times.append(current_time)
+        self.voltages.append(voltage)
+        self.currents.append(current)
+        self.powers.append(power)
+        self.system_state["last_power"] = power
+
+        # 리스트 길이 제한(예: 최근 200개)
+        MAX_LEN = 200
+        if len(self.times) > MAX_LEN:
+            self.times.pop(0)
+            self.voltages.pop(0)
+            self.currents.pop(0)
+            self.powers.pop(0)
+            self.energy_list.pop(0)
+
+        # 그래프 업데이트
+        self.update_graphs()
+
+    # ---------------------------------------------------------
+    # 그래프 4개 업데이트
+    # ---------------------------------------------------------
     def update_graphs(self):
-        mode = self.ui.comboBox_interval.currentText()
-        LogManager.instance().log(f"그래프 주기 변경: {mode}")
-        df = self.service.get_graph_data(mode)
-
-        if df is None or df.empty:
-            return
-
-        # ===== 전압 =====
+        # 전압
         self.fig_voltage.clear()
-        ax1 = self.fig_voltage.add_subplot(111)
-        ax1.plot(df["ts"], df["solar_v"], color="#930B0D", linewidth=1.5)
-        ax1.set_ylabel("Voltage")
-        ax1.grid(True)
-        ax1.tick_params(axis='x', labelsize=8)
-        formatter = self.get_time_format(mode)
-        ax1.xaxis.set_major_formatter(formatter)
+        ax = self.fig_voltage.add_subplot(111)
+        ax.plot(self.times, self.voltages, color="#930B0D")
+        ax.grid(True)
+        ax.xaxis.set_major_locator(MaxNLocator(5))
+        ax.tick_params(axis="x", rotation=0)   # ⭐ X축 세로 회전
         self.canvas_voltage.draw()
 
-        # ===== 전류 =====
+        # 전류
         self.fig_current.clear()
-        ax2 = self.fig_current.add_subplot(111)
-        ax2.plot(df["ts"], df["solar_i"], color="#0C6AA4", linewidth=1.5)
-        ax2.set_ylabel("Current")
-        ax2.grid(True)
-        ax2.tick_params(axis='x', labelsize=8)
-        formatter = self.get_time_format(mode)
-        ax2.xaxis.set_major_formatter(formatter)
+        ax = self.fig_current.add_subplot(111)
+        ax.plot(self.times, self.currents, color="#0C6AA4")
+        ax.grid(True)
+        ax.xaxis.set_major_locator(MaxNLocator(5))
+        ax.tick_params(axis="x", rotation=0)   # ⭐ X축 세로 회전
         self.canvas_current.draw()
 
-        # ===== 전력 =====
+        # 전력
         self.fig_power.clear()
-        ax3 = self.fig_power.add_subplot(111)
-        ax3.plot(df["ts"], df["solar_p"], color="#4C934C", linewidth=1.5)
-        ax3.set_ylabel("Power")
-        ax3.grid(True)
-        ax3.tick_params(axis='x', labelsize=8)
-        formatter = self.get_time_format(mode)
-        ax3.xaxis.set_major_formatter(formatter)
+        ax = self.fig_power.add_subplot(111)
+        ax.plot(self.times, self.powers, color="#4C934C")
+        ax.grid(True)
+        ax.xaxis.set_major_locator(MaxNLocator(5))
+        ax.tick_params(axis="x", rotation=0)   # ⭐ X축 세로 회전
         self.canvas_power.draw()
 
-        # ===== 누적 전력량 =====
+        # 누적 전력량
         self.fig_energy.clear()
-        ax4 = self.fig_energy.add_subplot(111)
-        df["cumulative_energy"] = df["solar_p"].cumsum() / 60  # Wh
-        ax4.plot(df["ts"], df["cumulative_energy"], color="#740399", linewidth=1.5)
-        ax4.set_ylabel("Energy")
-        ax4.grid(True)
-        ax4.tick_params(axis='x', labelsize=8)
-        formatter = self.get_time_format(mode)
-        ax4.xaxis.set_major_formatter(formatter)
+        ax = self.fig_energy.add_subplot(111)
+        ax.plot(self.times, self.energy_list, color="#740399")
+        ax.grid(True)
+        ax.xaxis.set_major_locator(MaxNLocator(5))
+        ax.tick_params(axis="x", rotation=0)   # ⭐ X축 세로 회전
         self.canvas_energy.draw()
-
-    def show_csv_table(self):
-    # 최근 24시간 데이터 가져오기
-        df = self.service.get_raw_last_24h()
-        if df is None or df.empty:
-            print("⚠️ CSV 표시할 데이터 없음")
-            return
-
-        # 팝업 다이얼로그 생성
-        dialog = QDialog()
-        dialog.setWindowTitle("최근 24시간 데이터")
-        dialog.resize(900, 600)
-
-        layout = QVBoxLayout(dialog)
-
-        # 테이블 생성
-        table = QTableWidget()
-        table.setRowCount(len(df))
-        table.setColumnCount(len(df.columns))
-        table.setHorizontalHeaderLabels(df.columns)
-
-        # 테이블에 데이터 채우기
-        for row in range(len(df)):
-            for col in range(len(df.columns)):
-                value = str(df.iat[row, col])
-                table.setItem(row, col, QTableWidgetItem(value))
-
-        layout.addWidget(table)
-        dialog.setLayout(layout)
-        dialog.exec_()

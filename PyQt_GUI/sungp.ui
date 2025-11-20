@@ -26,7 +26,7 @@
     <property name="geometry">
      <rect>
       <x>-20</x>
-      <y>50</y>
+      <y>-10</y>
       <width>1280</width>
       <height>831</height>
      </rect>
@@ -48,7 +48,7 @@
      <property name="geometry">
       <rect>
        <x>570</x>
-       <y>50</y>
+       <y>30</y>
        <width>481</width>
        <height>361</height>
       </rect>
@@ -90,7 +90,7 @@
        </font>
       </property>
       <property name="text">
-       <string>전류 (A)</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#0c6aa4;&quot;&gt;전류 (A)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -101,7 +101,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>50</y>
+       <y>30</y>
        <width>491</width>
        <height>361</height>
       </rect>
@@ -146,7 +146,7 @@
        <enum>Qt::RightToLeft</enum>
       </property>
       <property name="text">
-       <string>전압 (V)</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#930b0d;&quot;&gt;전압 (V)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -202,7 +202,7 @@
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>전력량(W)</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#4c934c;&quot;&gt;전력량(W)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -255,107 +255,13 @@
        </font>
       </property>
       <property name="text">
-       <string>누적 전력</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#740399;&quot;&gt;누적 전력&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </widget>
-   </widget>
-   <widget class="QComboBox" name="comboBox_interval">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>30</y>
-      <width>270</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QComboBox {
-    background: #ffffff;
-    color: #1d232f;
-    border: 1px solid #d7dde8;
-    border-radius: 8px;
-    padding: 6px 30px 6px 10px;
-   font-family: &quot;Noto Sans KR&quot;;
-   font-weight: 700;       
-}
-QComboBox:hover {
-    border-color: #bfc8d8;
-}
-QComboBox:focus {
-    border: 1px solid #4b8cff;
-}
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 24px;
-    border-left: 1px solid #d7dde8;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    background: #f7f9fc;
-}
-</string>
-    </property>
-    <item>
-     <property name="text">
-      <string>1분</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>10분</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>1시간</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>24시간</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QPushButton" name="btn_show_csv">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>30</y>
-      <width>270</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">    
-QPushButton {
-    background: #ffffff;
-    color: #1d232f;
-    border: 1px solid #d7dde8;
-    border-radius: 8px;
-  font-family: &quot;Noto Sans KR&quot;;
-   font-weight: 700;    
-   text-align: center;  ;
-}
-
-/* 마우스 올렸을 때 */
-QPushButton:hover {
-    background: #f5f6fa;
-}
-
-/* 클릭했을 때 (눌린 상태) */
-QPushButton:pressed {
-    background: #e1e5ee;
-    color: #0f1117;
-    border: 1px solid #b8bfd0;
-}</string>
-    </property>
-    <property name="text">
-     <string>CSV</string>
-    </property>
    </widget>
   </widget>
  </widget>

@@ -5,8 +5,8 @@ import time
 
 class SerialManager:
     def __init__(self):
-        self.port = None
-        self.is_connected = False
+        self.port = None            # pyserial 객체
+        self.is_connected = False   # 연결 상태 Boolean
 
     # ========================================
     # 사용 가능한 포트 목록 가져오기
@@ -29,6 +29,7 @@ class SerialManager:
                 rtscts=False
             )
             time.sleep(0.2)
+
             self.is_connected = True
             return True
 
@@ -48,10 +49,10 @@ class SerialManager:
         self.is_connected = False
 
     # ========================================
-    # 명령 전송
+    # 텍스트 명령 전송 (기존 방식)
     # ========================================
     def send(self, cmd: str):
-        """'$ue' → '$ue\n' 자동 변환 후 전송"""
+        """'$ue' → '$ue\\n' 자동 변환 후 전송"""
         if not self.is_connected or self.port is None:
             print("[Serial] Not connected")
             return False
@@ -77,5 +78,32 @@ class SerialManager:
                 return line
         except:
             return ""
-
         return ""
+
+    # ========================================
+    # ⭐ DashboardController 호환을 위한 추가 메서드
+    # ========================================
+
+    def reset_input_buffer(self):
+        """Dashboard에서 사용하는 버퍼 삭제 함수"""
+        if self.port and self.port.is_open:
+            try:
+                self.port.reset_input_buffer()
+            except:
+                pass
+
+    def write(self, data: bytes):
+        """Dashboard에서 raw bytes 직접 전송하는 write 함수"""
+        if self.port and self.port.is_open:
+            try:
+                self.port.write(data)
+            except:
+                pass
+
+    def flush(self):
+        """Dashboard에서 사용하는 flush 함수"""
+        if self.port and self.port.is_open:
+            try:
+                self.port.flush()
+            except:
+                pass
